@@ -13,7 +13,7 @@ public class ShipController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Health = 4;
+        Health = 3;
         Rotation = 0;
     }
 

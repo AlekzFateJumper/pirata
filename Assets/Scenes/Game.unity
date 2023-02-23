@@ -4433,6 +4433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roundTime: {fileID: 145239752}
+  scoreTxt: {fileID: 311658117}
 --- !u!4 &2003866248
 Transform:
   m_ObjectHideFlags: 0
