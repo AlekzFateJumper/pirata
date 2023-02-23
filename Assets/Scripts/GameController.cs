@@ -42,6 +42,12 @@ public class GameController : MonoBehaviour
         scoreTxt.text = "Pontos: " + score.ToString();
     }
 
+    void ExplodeShip(String type){
+        if(type == "player"){
+            GameOver();
+        }
+    }
+
     void GameOver(){
         SceneManager.LoadScene("GameOver");
     }

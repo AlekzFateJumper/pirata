@@ -7,6 +7,8 @@ public class ShipController : MonoBehaviour
     private int Health;
     private float Rotation;
 
+    public String type;
+
     public List<Sprite> sprites;
     public SpriteRenderer ship;
 
@@ -34,7 +36,7 @@ public class ShipController : MonoBehaviour
     }
 
     void Explode(){
-        
+        GameObject.SendMessageUpwards("ExplodeShip", type);
     }
 
     void updateLifeBar(){
