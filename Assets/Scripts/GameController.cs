@@ -44,6 +44,6 @@ public class GameController : MonoBehaviour
 
     void GameOver(){
         PlayerPrefs.SetInt("score", score);
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("GameOver");
     }
 }
