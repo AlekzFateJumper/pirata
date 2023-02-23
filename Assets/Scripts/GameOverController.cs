@@ -26,12 +26,12 @@ public class GameOverController : MonoBehaviour
     }
 
     public void Play(){
-        var score = PlayerPrefs.SetInt("score", 0);
+        PlayerPrefs.SetInt("score", 0);
         SceneManager.LoadScene("Game");
     }
 
     public void MainMenu(){
-        var score = PlayerPrefs.SetInt("score", 0);
-        SceneManager.LoadScene("MainMenu");
+        PlayerPrefs.SetInt("score", 0);
+        SceneManager.LoadScene("Main Menu");
     }
 }
