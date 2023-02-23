@@ -11,13 +11,12 @@ public class GameController : MonoBehaviour
     public TMP_Text scoreTxt;
 
     private float timeLeft;
-    private int score;
 
     // Start is called before the first frame update
     void Start()
     {
         timeLeft = PlayerPrefs.GetInt("rTime");
-        score = 0;
+        PlayerPrefs.SetInt("score", 0);
 
         UpdateTime();
         UpdateScore();
@@ -39,11 +38,11 @@ public class GameController : MonoBehaviour
     }
 
     void UpdateScore(){
+        var score = PlayerPrefs.GetInt("score");
         scoreTxt.text = "Pontos: " + score.ToString();
     }
 
     void GameOver(){
-        PlayerPrefs.SetInt("score", score);
         SceneManager.LoadScene("GameOver");
     }
 }
