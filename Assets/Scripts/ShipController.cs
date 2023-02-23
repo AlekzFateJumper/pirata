@@ -5,12 +5,10 @@ using UnityEngine;
 public class ShipController : MonoBehaviour
 {
     private int Health;
-    private float Rotation;
-
-    public String type;
+    public float Rotation;
 
     public List<Sprite> sprites;
-    public SpriteRenderer ship;
+    public GameObject ship;
 
     public Transform lifeMask;
 
@@ -28,7 +26,7 @@ public class ShipController : MonoBehaviour
     }
 
     void Hit(){
-        ship.sprite = sprites[--Health];
+        ship.GetComponent<SpriteRenderer>.sprite = sprites[--Health];
         updateLifeBar();
         if(Health <= 0){
             Explode();
@@ -36,7 +34,13 @@ public class ShipController : MonoBehaviour
     }
 
     void Explode(){
-        GameObject.SendMessageUpwards("ExplodeShip", type);
+        
+    }
+
+    void Exploded(){
+        if(gameObject.CompareTag("Player")){
+            gameObject.SendMessageUpwards("GameOver");
+        }
     }
 
     void updateLifeBar(){

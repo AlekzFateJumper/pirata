@@ -16,8 +16,8 @@ public class MenuControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.SetInt("rTime", 60);
-        PlayerPrefs.SetInt("sTime", 5);
+        ChangeRoundTime(120);
+        ChangeSpawnTime(5);
     }
 
     // Update is called once per frame
@@ -37,13 +37,13 @@ public class MenuControl : MonoBehaviour
     }
 
     public void ChangeRoundTime(float time){
-        roundTime.text = TimeSpan.FromSeconds(time).ToString(@"m\:ss");
+        if(roundTime != null) roundTime.text = TimeSpan.FromSeconds(time).ToString(@"m\:ss");
         PlayerPrefs.SetInt("rTime", (int) time);
 
     }
 
     public void ChangeSpawnTime(float time){
-        spawnTime.text = TimeSpan.FromSeconds(time).ToString(@"m\:ss");
+        if(spawnTime != null) spawnTime.text = TimeSpan.FromSeconds(time).ToString(@"m\:ss");
         PlayerPrefs.SetInt("sTime", (int) time);
     }
 
