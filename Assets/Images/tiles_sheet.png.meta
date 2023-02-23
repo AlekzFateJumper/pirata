@@ -2190,8 +2190,8 @@ TextureImporter:
       sandy_beach_sw: -1055465565
       tiles_sheet_63: 1965096178
       tiles_sheet_72: -1686985771
-      tiles_sheet_92: 1786392237
       green_boat_wreck: 253714301
+      tiles_sheet_92: 1786392237
       tiles_sheet_7: -2007109186
       tiles_sheet_46: -2095606317
       rock_00: -353680216
@@ -2243,10 +2243,10 @@ TextureImporter:
       green_inner_nw: 1910259274
       tiles_sheet_14: -1941963492
       tiles_sheet_26: -2062941321
-      tiles_sheet_76: 1683782330
       green_rock_00: -1779734347
-      rockg_00: 15570540
+      tiles_sheet_76: 1683782330
       sandy_beach_ne: -1253582540
+      rockg_00: 15570540
       sandy_inner_se: -911274596
       tiles_sheet_5: 170476244
       tiles_sheet_75: -31056543
