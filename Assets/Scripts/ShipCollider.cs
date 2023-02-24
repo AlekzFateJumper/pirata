@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class ShipCollider : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void OnCollisionEnter2D (Collision2D collision)
     {
-        
+        SendMessageUpwards("CollideEnter", collision);
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnCollisionExit2D (Collision2D collision)
     {
-        
+        SendMessageUpwards("CollideExit", collision);
     }
 
-    void OnCollisionEnter2D (Collision2D collision) {
-        SendMessageUpwards("Collide", collision);
+    void OnCollisionStay2D (Collision2D collision)
+    {
+        SendMessageUpwards("CollideStay", collision);
     }
+
 }

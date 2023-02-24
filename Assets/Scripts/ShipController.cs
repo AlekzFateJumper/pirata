@@ -6,16 +6,17 @@ public class ShipController : MonoBehaviour
 {
     public List<Sprite> sprites;
     public GameObject ship;
+    public SpriteRenderer shipSprite;
     public Transform lifeMask;
     public GameObject explosion;
-    public float speed = 50f;
+    public float rot_speed;
+    public float speed;
 
     private Rigidbody2D shipBody;
     private int Health;
     private float Andar;
     private float Girar;
 
-    // Start is called before the first frame update
     void Start()
     {
         Health = 3;
@@ -28,23 +29,19 @@ public class ShipController : MonoBehaviour
         Andar = (float) a[0];
         Girar = (float) a[1];
     }
-    // Update is called once per frame
-    void Update()
-    {
-        Debug.Log("Multi: " + (Vector3.up * Time.deltaTime * Girar));
-        Debug.Log("Multi: " + (Time.deltaTime * Girar));
 
-        shipBody.transform.Rotate(Vector3.back * Time.deltaTime * Girar * speed);
+    void FixedUpdate()
+    {
+        shipBody.transform.Rotate(Vector3.back * Time.fixedDeltaTime * Girar * rot_speed);
 
         if(Andar >= 0){
-            Debug.Log("Andar: " + Andar);
-            Debug.Log("Direção: " + shipBody.transform.up);
-            GetComponent<Rigidbody2D>().AddForce(shipBody.transform.up * Andar * speed);
+            var vetor = (ship.transform.up * Andar * (-speed) * Time.fixedDeltaTime);
+            GetComponent<Rigidbody2D>().AddForce(vetor);
         }
     }
 
     void Hit(){
-        ship.GetComponent<SpriteRenderer>().sprite = sprites[--Health];
+        shipSprite.sprite = sprites[--Health];
         updateLifeBar();
         if(Health <= 0){
             Explode();
@@ -79,7 +76,7 @@ public class ShipController : MonoBehaviour
         lifeMask.position = pos;
     }
 
-    void Collide (Collision2D collision) {
+    void CollideEnter (Collision2D collision) {
         if (collision.gameObject.CompareTag("CannonBall")) {
             //var exploding = Instantiate(explosion, transform.position, transform.rotation);
             //exploding.Weak();
@@ -89,5 +86,11 @@ public class ShipController : MonoBehaviour
             updateLifeBar();
             Explode();
         }
+    }
+
+    void CollideExit (Collision2D collision) {
+    }
+
+    void CollideStay (Collision2D collision) {
     }
 }

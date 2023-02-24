@@ -400,14 +400,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 958681068}
     m_Modifications:
+    - target: {fileID: 1709682987828666639, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746592189789364571, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2365360292568541904, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
       propertyPath: ship
       value: 
       objectReference: {fileID: 1865323931}
-    - target: {fileID: 2365360292568541904, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
-      propertyPath: speed
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 2365360292568541904, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
       propertyPath: Rotation
       value: 90
@@ -431,6 +435,18 @@ PrefabInstance:
     - target: {fileID: 4012306013539874745, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4901144786832551183, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4990185619823978119, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7460665384120765427, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7713947172804467629, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
       propertyPath: m_RootOrder
@@ -475,6 +491,10 @@ PrefabInstance:
     - target: {fileID: 7713947172804467629, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779553033673782380, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8997144119124941705, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
       propertyPath: m_TagString

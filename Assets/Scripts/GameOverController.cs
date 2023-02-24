@@ -8,16 +8,9 @@ public class GameOverController : MonoBehaviour
 {
     public TMP_Text scoreTxt;
 
-    // Start is called before the first frame update
     void Start()
     {
         UpdateScore();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void UpdateScore(){

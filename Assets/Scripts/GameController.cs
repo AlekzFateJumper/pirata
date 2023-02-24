@@ -12,7 +12,6 @@ public class GameController : MonoBehaviour
 
     private float timeLeft;
 
-    // Start is called before the first frame update
     void Start()
     {
         timeLeft = PlayerPrefs.GetInt("rTime");
@@ -22,7 +21,6 @@ public class GameController : MonoBehaviour
         UpdateScore();
     }
 
-    // Update is called once per frame
     void Update()
     {
         timeLeft -= Time.deltaTime;
