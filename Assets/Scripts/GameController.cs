@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
 
     public GameObject shipPrefab;
     public List<Transform> spawnPoints;
+    public List<Sprite> ShooterSprites;
+    public List<Sprite> ChaserSprites;
 
     private float timeLeft;
     private bool init;
@@ -26,7 +28,7 @@ public class GameController : MonoBehaviour
 
         UpdateTime();
         UpdateScore();
-        spawnEnemy();
+        StartCoroutine(spawnEnemy());
     }
 
     void Update()
@@ -59,5 +61,6 @@ public class GameController : MonoBehaviour
         GameObject enemy = Instantiate(shipPrefab, spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count-1)].position, Quaternion.identity);
         EnemyController enemyScript = enemy.AddComponent<EnemyController>();
         enemy.tag = enemyTags[UnityEngine.Random.Range(0, enemyTags.Length-1)];
+        StartCoroutine(spawnEnemy());
     }
 }

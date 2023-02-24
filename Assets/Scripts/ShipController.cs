@@ -32,7 +32,7 @@ public class ShipController : MonoBehaviour
         shipBody = ship.GetComponent<Rigidbody2D>();
         blocked = false;
         cannonWait = new float[3] { 0f, 0f, 0f };
-        shipSprite.sprite = sprites[Health];
+        if(tag == "Player") shipSprite.sprite = sprites[Health];
     }
 
     public void Mover(object args)

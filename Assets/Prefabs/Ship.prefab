@@ -141,7 +141,7 @@ MonoBehaviour:
   lifeMask: {fileID: 6022039540868944669}
   rot_speed: 50
   speed: 100
-  explosion: {fileID: 272174648339148881, guid: 849f191b2eef6c44f96c99e1e8fdf482, type: 3}
+  explosion: {fileID: 4113750329355215036, guid: 8a2277beca45b8074a5aba36cb9e67e8, type: 3}
   cannonBall: {fileID: 6739395446274484108, guid: 3471217159dda12e983abb61ed2aa906, type: 3}
   canhaoFrontal: {fileID: 1749376284029201600}
   canhaoDir:
