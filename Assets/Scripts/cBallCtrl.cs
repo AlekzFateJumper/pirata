@@ -24,5 +24,6 @@ public class cBallCtrl : MonoBehaviour
 
     public void setOrigin(int id){
         origin = id;
+        Debug.Log(origin);
     }
 }

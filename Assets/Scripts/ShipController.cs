@@ -142,6 +142,7 @@ public class ShipController : MonoBehaviour
     void TiroFrontal () {
         if(cannonWait[0] > 0) return;
         GameObject cBall = Instantiate(cannonBall, new Vector3(canhaoFrontal.position.x, canhaoFrontal.position.y, canhaoFrontal.position.z),canhaoFrontal.rotation) as GameObject;
+        cBall.GetComponent<cBallCtrl>().setOrigin(GetInstanceID());
         cBall.GetComponent<Rigidbody2D>().AddForce(canhaoFrontal.right * 1000);
         cannonWait[0] = 0.5f;
     }
@@ -157,6 +158,7 @@ public class ShipController : MonoBehaviour
 
         foreach (var cannon in cannons) {
             GameObject cBall = Instantiate(cannonBall, new Vector3(cannon.position.x, cannon.position.y, cannon.position.z),cannon.rotation) as GameObject;
+            cBall.GetComponent<cBallCtrl>().setOrigin(GetInstanceID());
             cBall.GetComponent<Rigidbody2D>().AddForce(cannon.right * (direita?-1000:1000));
         }
     }
