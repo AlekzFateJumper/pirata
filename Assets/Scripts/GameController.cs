@@ -57,10 +57,10 @@ public class GameController : MonoBehaviour
         GameObject enemy = Instantiate(shipPrefab, spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count-1)].position, Quaternion.identity);
         EnemyController enemyScript = enemy.AddComponent<EnemyController>();
         enemy.tag = enemyTags[UnityEngine.Random.Range(0, enemyTags.Length-1)];
-        var sprites = shooterSprites;
-        if(enemy.tag == "Chaser"){
-            sprites = chaserSprites;
+        if(enemy.tag == "Shooter"){
+            enemyScript.Init(shooterSprites);
+        }else if(enemy.tag == "Chaser"){
+            enemyScript.Init(chaserSprites);
         }
-        enemyScript.Init(sprites);
     }
 }
