@@ -16,7 +16,6 @@ public class GameController : MonoBehaviour
     public List<Sprite> chaserSprites;
 
     private float timeLeft;
-    private bool init;
     private String[] enemyTags;
 
     void Start()
@@ -24,7 +23,6 @@ public class GameController : MonoBehaviour
         timeLeft = PlayerPrefs.GetInt("rTime");
         int spawn = PlayerPrefs.GetInt("sTime");
         PlayerPrefs.SetInt("score", 0);
-        init = true;
         enemyTags = new String[2] {"Shooter", "Chaser"};
 
         UpdateTime();
@@ -55,9 +53,7 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
-    spawnEnemy() {
-        int interval = PlayerPrefs.GetInt("sTime");
-        else init = false;
+    void spawnEnemy() {
         GameObject enemy = Instantiate(shipPrefab, spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count-1)].position, Quaternion.identity);
         EnemyController enemyScript = enemy.AddComponent<EnemyController>();
         enemy.tag = enemyTags[UnityEngine.Random.Range(0, enemyTags.Length-1)];
