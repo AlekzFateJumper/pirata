@@ -59,7 +59,9 @@ public class ShipController : MonoBehaviour
     }
 
     void Hit() {
+
         if(--Health < 0) Health = 0;
+        Debug.Log("Health: " + Health);
         shipSprite.sprite = sprites[Health];
         updateLifeBar();
         Explode();
@@ -175,11 +177,12 @@ public class ShipController : MonoBehaviour
 
     IEnumerator FadeTo(float aValue, float aTime)
     {
-        float alpha = transform.GetComponentInChildren<Renderer>().material.color.a;
+        Renderer rend = transform.GetComponentInChildren<Renderer>();
+        float alpha = rend.material.color.a;
         for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
         {
             Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha,aValue,t));
-            transform.GetComponent<Renderer>().material.color = newColor;
+            rend.material.color = newColor;
             yield return null;
         }
         Naufragio();

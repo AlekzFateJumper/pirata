@@ -4736,6 +4736,16 @@ MonoBehaviour:
   - {fileID: 548066741}
   - {fileID: 524079816}
   - {fileID: 1319916051}
+  shooterSprites:
+  - {fileID: -7983967528224472741, guid: 55005b8cf345de1119189fdccc42c740, type: 3}
+  - {fileID: -1813710974681768389, guid: 55005b8cf345de1119189fdccc42c740, type: 3}
+  - {fileID: -8281732154671149309, guid: 55005b8cf345de1119189fdccc42c740, type: 3}
+  - {fileID: -4815615835704438105, guid: 55005b8cf345de1119189fdccc42c740, type: 3}
+  chaserSprites:
+  - {fileID: -25834472639104344, guid: 55005b8cf345de1119189fdccc42c740, type: 3}
+  - {fileID: 4328014207292634597, guid: 55005b8cf345de1119189fdccc42c740, type: 3}
+  - {fileID: 7914031736525305938, guid: 55005b8cf345de1119189fdccc42c740, type: 3}
+  - {fileID: 1419721530640015094, guid: 55005b8cf345de1119189fdccc42c740, type: 3}
 --- !u!4 &2003866248
 Transform:
   m_ObjectHideFlags: 0
