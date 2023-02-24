@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,11 +17,15 @@ public class ShipController : MonoBehaviour
     private int Health;
     private float Andar;
     private float Girar;
+    private bool blocked;
 
     void Start()
     {
+        Andar = 0;
+        Girar = 0;
         Health = 3;
         shipBody = ship.GetComponent<Rigidbody2D>();
+        blocked = false;
     }
 
     public void Mover(object args)
@@ -34,7 +39,7 @@ public class ShipController : MonoBehaviour
     {
         shipBody.transform.Rotate(Vector3.back * Time.fixedDeltaTime * Girar * rot_speed);
 
-        if(Andar >= 0){
+        if(Andar >= 0 && !blocked){
             var vetor = (ship.transform.up * Andar * (-speed) * Time.fixedDeltaTime);
             GetComponent<Rigidbody2D>().AddForce(vetor);
         }
@@ -85,12 +90,35 @@ public class ShipController : MonoBehaviour
             Health = 0;
             updateLifeBar();
             Explode();
+        }else{
+            blocked = true;
+            var rb2 = GetComponent<Rigidbody2D>();
+            rb2.velocity = Vector2.zero;
+            var vetor = (ship.transform.up * speed * Time.deltaTime);
+            rb2.AddForce(vetor);
         }
     }
 
     void CollideExit (Collision2D collision) {
+        if(collision.contactCount == 0) blocked = false;
     }
 
     void CollideStay (Collision2D collision) {
+        ContactPoint2D[] contactPoints = new ContactPoint2D[collision.contactCount];
+        collision.GetContacts(contactPoints);
+        
+        foreach (ContactPoint2D contactPoint in contactPoints)
+        {
+            if (Math.Abs(contactPoint.normal.x + ship.transform.up.x) < 0.1
+            && Math.Abs(contactPoint.normal.y + ship.transform.up.y) < 0.1 )
+            {
+                blocked = false;
+            }
+            else
+            {
+                blocked = true;
+                break;
+            }
+        }
     }
 }
