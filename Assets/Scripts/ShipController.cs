@@ -9,15 +9,20 @@ public class ShipController : MonoBehaviour
     public GameObject ship;
     public SpriteRenderer shipSprite;
     public Transform lifeMask;
-    public GameObject explosion;
     public float rot_speed;
     public float speed;
+    public GameObject explosion;
+    public GameObject cannonBall;
+    public Transform canhaoFrontal;
+    public List<Transform> canhaoDir;
+    public List<Transform> canhaoEsq;
 
     private Rigidbody2D shipBody;
     private int Health;
     private float Andar;
     private float Girar;
     private bool blocked;
+    private float[] cannonWait;
 
     void Start()
     {
@@ -26,6 +31,7 @@ public class ShipController : MonoBehaviour
         Health = 3;
         shipBody = ship.GetComponent<Rigidbody2D>();
         blocked = false;
+        cannonWait = new float[3] { 0f, 0f, 0f };
     }
 
     public void Mover(object args)
@@ -43,10 +49,16 @@ public class ShipController : MonoBehaviour
             var vetor = (ship.transform.up * Andar * (-speed) * Time.fixedDeltaTime);
             GetComponent<Rigidbody2D>().AddForce(vetor);
         }
+
+        for(var i = 0; i < 3; i++){
+            if(cannonWait[i] > 0) cannonWait[i] -= Time.fixedDeltaTime;
+            if(cannonWait[i] < 0) cannonWait[i] = 0;
+        }
     }
 
     void Hit(){
-        shipSprite.sprite = sprites[--Health];
+        if(--Health < 0) Health = 0;
+        shipSprite.sprite = sprites[Health];
         updateLifeBar();
         if(Health <= 0){
             Explode();
@@ -54,8 +66,8 @@ public class ShipController : MonoBehaviour
     }
 
     void Explode(){
-        //var exploding = Instantiate(explosion, transform.position, transform.rotation);
-        //exploding.Sink();
+        var exploding = Instantiate(explosion, transform.position, transform.rotation);
+        exploding.
     }
 
     void Exploded(){
@@ -83,10 +95,9 @@ public class ShipController : MonoBehaviour
 
     void CollideEnter (Collision2D collision) {
         if (collision.gameObject.CompareTag("CannonBall")) {
-            //var exploding = Instantiate(explosion, transform.position, transform.rotation);
-            //exploding.Weak();
             Hit();
-        }else if((CompareTag("Chaser") || CompareTag("Player")) && (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Chaser"))){
+            Destroy(collision.gameObject);
+        }else if(collision.gameObject.name == "Ship"){
             Health = 0;
             updateLifeBar();
             Explode();
@@ -121,4 +132,27 @@ public class ShipController : MonoBehaviour
             }
         }
     }
+
+    void TiroFrontal () {
+        if(cannonWait[0] > 0) return;
+        GameObject cBall = Instantiate(cannonBall, new Vector3(canhaoFrontal.position.x, canhaoFrontal.position.y, canhaoFrontal.position.z),canhaoFrontal.rotation) as GameObject;
+        cBall.GetComponent<Rigidbody2D>().AddForce(canhaoFrontal.right * 1000);
+        cannonWait[0] = 0.5f;
+    }
+
+    void TiroLateral (bool direita) {
+        var cannons = canhaoEsq;
+        if (direita){
+            if (cannonWait[1] > 0) return;
+            cannons = canhaoDir;
+            cannonWait[1] = 0.5f;
+        }else if (cannonWait[2] > 0) return;
+        else cannonWait[2] = 0.5f;
+
+        foreach (var cannon in cannons) {
+            GameObject cBall = Instantiate(cannonBall, new Vector3(cannon.position.x, cannon.position.y, cannon.position.z),cannon.rotation) as GameObject;
+            cBall.GetComponent<Rigidbody2D>().AddForce(cannon.right * (direita?-1000:1000));
+        }
+    }
+
 }
