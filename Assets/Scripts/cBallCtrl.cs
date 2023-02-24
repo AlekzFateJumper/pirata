@@ -19,11 +19,12 @@ public class cBallCtrl : MonoBehaviour
     void Update()
     {
         Debug.Log(Time.time);
+        Debug.Log(rbd.velocity);
         if(rbd.velocity == Vector2.zero) Destroy(gameObject);
     }
 
     public void setOrigin(int id){
         origin = id;
-        Debug.Log(origin);
+        // Debug.Log(origin);
     }
 }

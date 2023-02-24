@@ -403,7 +403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 524079816}
   m_Layer: 0
-  m_Name: Spawn Point
+  m_Name: Spawn Point 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -434,7 +434,7 @@ GameObject:
   m_Component:
   - component: {fileID: 548066741}
   m_Layer: 0
-  m_Name: Spawn Point
+  m_Name: Spawn Point 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -864,7 +864,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1319916051}
   m_Layer: 0
-  m_Name: Spawn Point
+  m_Name: Spawn Point 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -895,7 +895,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1446883424}
   m_Layer: 0
-  m_Name: Spawn Point
+  m_Name: Spawn Point 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4730,6 +4730,12 @@ MonoBehaviour:
   roundTime: {fileID: 145239752}
   scoreTxt: {fileID: 311658117}
   shipPrefab: {fileID: 3085113773880965901, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
+  spawnPoints:
+  - {fileID: 2058175561}
+  - {fileID: 1446883424}
+  - {fileID: 548066741}
+  - {fileID: 524079816}
+  - {fileID: 1319916051}
 --- !u!4 &2003866248
 Transform:
   m_ObjectHideFlags: 0
@@ -4755,7 +4761,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2058175561}
   m_Layer: 0
-  m_Name: Spawn Point
+  m_Name: Spawn Point 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

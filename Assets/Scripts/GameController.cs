@@ -56,8 +56,8 @@ public class GameController : MonoBehaviour
         int interval = PlayerPrefs.GetInt("sTime");
         if(!init) yield return new WaitForSeconds(interval);
         else init = false;
-        GameObject enemy = Instantiate(shipPrefab, spawnPoints[System.Random(0, spawnPoints.Count)].position, Quaternion.identity);
+        GameObject enemy = Instantiate(shipPrefab, spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count-1)].position, Quaternion.identity);
         EnemyController enemyScript = enemy.AddComponent<EnemyController>();
-        enemy.tag = enemyTags[System.Random(0, enemyTags.Length)];
+        enemy.tag = enemyTags[UnityEngine.Random.Range(0, enemyTags.Length-1)];
     }
 }

@@ -11,16 +11,16 @@ public class EnemyController : MonoBehaviour
         shipCtrl.sprites.Clear();
         switch(tag){
             case "Shooter":
-                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (22).png"));
-                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (16).png"));
-                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (10).png"));
-                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (4).png"));
+                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (22)"));
+                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (16)"));
+                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (10)"));
+                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (4)"));
             break;
             case "Chaser":
-                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (23).png"));
-                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (17).png"));
-                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (11).png"));
-                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (5).png"));
+                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (23)"));
+                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (17)"));
+                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (11)"));
+                shipCtrl.sprites.Add(Resources.Load<Sprite>("ship (5)"));
             break;
         }
     }
