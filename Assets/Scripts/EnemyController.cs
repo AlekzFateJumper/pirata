@@ -6,9 +6,8 @@ public class EnemyController : MonoBehaviour
 {
     public List<Sprite> sprites;
 
-    void Start()
+    void Init()
     {
-        Debug.Log("Enemy spawn");
         ShipController shipCtrl = GetComponent<ShipController>();
         shipCtrl.sprites = sprites;
         shipCtrl.shipSprite.sprite = shipCtrl.sprites[3];

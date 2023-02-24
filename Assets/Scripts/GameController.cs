@@ -62,5 +62,6 @@ public class GameController : MonoBehaviour
         }else if(enemy.tag == "Chaser"){
             enemyScript.sprites = chaserSprites;
         }
+        enemyScript.Init();
     }
 }
