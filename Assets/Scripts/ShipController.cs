@@ -45,38 +45,42 @@ public class ShipController : MonoBehaviour
     {
         shipBody.transform.Rotate(Vector3.back * Time.fixedDeltaTime * Girar * rot_speed);
 
-        if(Andar >= 0 && !blocked){
+        if(Andar >= 0 && !blocked) {
             var vetor = (ship.transform.up * Andar * (-speed) * Time.fixedDeltaTime);
             GetComponent<Rigidbody2D>().AddForce(vetor);
         }
 
-        for(var i = 0; i < 3; i++){
+        for(var i = 0; i < 3; i++) {
             if(cannonWait[i] > 0) cannonWait[i] -= Time.fixedDeltaTime;
             if(cannonWait[i] < 0) cannonWait[i] = 0;
         }
     }
 
-    void Hit(){
+    void Hit() {
         if(--Health < 0) Health = 0;
         shipSprite.sprite = sprites[Health];
         updateLifeBar();
-        if(Health <= 0){
-            Explode();
+        Explode();
+    }
+
+    void Explode() {
+        var exploding = Instantiate(explosion, transform.position, transform.rotation);
+        exploding.GetComponent<ExplosionCtrl>().setCallback(Exploded);
+    }
+
+    void Exploded() {
+        if(Health == 0) {
+            StartCoroutine(FadeTo(0.0f, 1.0f));
         }
     }
 
-    void Explode(){
-        var exploding = Instantiate(explosion, transform.position, transform.rotation);
-        exploding.
-    }
-
-    void Exploded(){
-        if(gameObject.CompareTag("Player")){
+    void Naufragio() {
+        if(gameObject.CompareTag("Player")) {
             gameObject.SendMessageUpwards("GameOver");
         }
     }
 
-    void updateLifeBar(){
+    void updateLifeBar() {
         Vector3 pos = new Vector3(0,0,0);
         switch (Health)
         {
@@ -95,13 +99,18 @@ public class ShipController : MonoBehaviour
 
     void CollideEnter (Collision2D collision) {
         if (collision.gameObject.CompareTag("CannonBall")) {
+            // Para não ser atingido pela própria bala de canhão:
+            if(collision.gameObject.GetComponent<cBallCtrl>().origin == GetInstanceID()) return;
+            // Toma dano:
             Hit();
+            // Destrói a bola de canhão:
             Destroy(collision.gameObject);
-        }else if(collision.gameObject.name == "Ship"){
+        } else if (collision.gameObject.name == "Ship") {
+            // Se um barco colidir com outro barco, ambos explodem.
             Health = 0;
             updateLifeBar();
             Explode();
-        }else{
+        } else {
             blocked = true;
             var rb2 = GetComponent<Rigidbody2D>();
             rb2.velocity = Vector2.zero;
@@ -121,12 +130,9 @@ public class ShipController : MonoBehaviour
         foreach (ContactPoint2D contactPoint in contactPoints)
         {
             if (Math.Abs(contactPoint.normal.x + ship.transform.up.x) < 0.1
-            && Math.Abs(contactPoint.normal.y + ship.transform.up.y) < 0.1 )
-            {
+            && Math.Abs(contactPoint.normal.y + ship.transform.up.y) < 0.1 ) {
                 blocked = false;
-            }
-            else
-            {
+            } else {
                 blocked = true;
                 break;
             }
@@ -142,11 +148,11 @@ public class ShipController : MonoBehaviour
 
     void TiroLateral (bool direita) {
         var cannons = canhaoEsq;
-        if (direita){
+        if (direita) {
             if (cannonWait[1] > 0) return;
             cannons = canhaoDir;
             cannonWait[1] = 0.5f;
-        }else if (cannonWait[2] > 0) return;
+        } else if (cannonWait[2] > 0) return;
         else cannonWait[2] = 0.5f;
 
         foreach (var cannon in cannons) {
@@ -155,4 +161,14 @@ public class ShipController : MonoBehaviour
         }
     }
 
+    IEnumerator FadeTo(float aValue, float aTime)
+    {
+        float alpha = transform.GetComponent<Renderer>().material.color.a;
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+        {
+            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha,aValue,t));
+            transform.GetComponent<Renderer>().material.color = newColor;
+            yield return null;
+        }
+    }
 }

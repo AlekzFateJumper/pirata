@@ -8,14 +8,11 @@ public class cBallCtrl : MonoBehaviour
     public int origin;
 
     private Rigidbody2D rbd;
-    private Collider2D cld;
 
     // Start is called before the first frame update
     void Start()
     {
         rbd = GetComponent<Rigidbody2D>();
-        cld = GetComponent<Collider2D>();
-        cld.enabled = false;
     }
 
     // Update is called once per frame
@@ -25,7 +22,7 @@ public class cBallCtrl : MonoBehaviour
         if(rbd.velocity == Vector2.zero) Destroy(gameObject);
     }
 
-    public setOrigin(int id){
+    public void setOrigin(int id){
         origin = id;
     }
 }
