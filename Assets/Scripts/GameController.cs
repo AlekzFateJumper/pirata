@@ -12,8 +12,8 @@ public class GameController : MonoBehaviour
 
     public GameObject shipPrefab;
     public List<Transform> spawnPoints;
-    public List<Sprite> ShooterSprites;
-    public List<Sprite> ChaserSprites;
+    public List<Sprite> shooterSprites;
+    public List<Sprite> chaserSprites;
 
     private float timeLeft;
     private bool init;
@@ -22,13 +22,14 @@ public class GameController : MonoBehaviour
     void Start()
     {
         timeLeft = PlayerPrefs.GetInt("rTime");
+        int spawn = PlayerPrefs.GetInt("sTime");
         PlayerPrefs.SetInt("score", 0);
         init = true;
         enemyTags = new String[2] {"Shooter", "Chaser"};
 
         UpdateTime();
         UpdateScore();
-        StartCoroutine(spawnEnemy());
+        InvokeRepeating("spawnEnemy", 0f, (float) spawn );
     }
 
     void Update()
@@ -54,13 +55,16 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
-    IEnumerator spawnEnemy() {
+    spawnEnemy() {
         int interval = PlayerPrefs.GetInt("sTime");
-        if(!init) yield return new WaitForSeconds(interval);
         else init = false;
         GameObject enemy = Instantiate(shipPrefab, spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count-1)].position, Quaternion.identity);
         EnemyController enemyScript = enemy.AddComponent<EnemyController>();
         enemy.tag = enemyTags[UnityEngine.Random.Range(0, enemyTags.Length-1)];
-        StartCoroutine(spawnEnemy());
+        if(enemy.tag == "Shooter"){
+            enemyScript.sprites = shooterSprites;
+        }else if(enemy.tag == "Chaser"){
+            enemyScript.sprites = chaserSprites;
+        }
     }
 }

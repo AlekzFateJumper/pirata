@@ -78,6 +78,8 @@ public class ShipController : MonoBehaviour
     void Naufragio() {
         if(gameObject.CompareTag("Player")) {
             gameObject.SendMessageUpwards("GameOver");
+        }else{
+            Destroy(gameObject);
         }
     }
 
@@ -173,5 +175,6 @@ public class ShipController : MonoBehaviour
             transform.GetComponent<Renderer>().material.color = newColor;
             yield return null;
         }
+        Naufragio();
     }
 }
