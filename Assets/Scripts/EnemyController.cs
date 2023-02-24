@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public List<Sprite> sprites;
-
-    public void Init()
+    public void Init(List<Sprite> sprites)
     {
         ShipController shipCtrl = GetComponent<ShipController>();
-        shipCtrl.sprites = sprites;
+        shipCtrl.setSprites(sprites);
         shipCtrl.shipSprite.sprite = shipCtrl.sprites[3];
     }
 
