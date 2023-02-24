@@ -23,6 +23,7 @@ public class ShipController : MonoBehaviour
     private float Girar;
     private bool blocked;
     private float[] cannonWait;
+    private GameObject exploding;
 
     void Start()
     {
@@ -65,13 +66,15 @@ public class ShipController : MonoBehaviour
     }
 
     void Explode() {
-        var exploding = Instantiate(explosion, transform.position, transform.rotation);
-        exploding.GetComponent<ExplosionCtrl>().setCallback(Exploded);
+        exploding = Instantiate(explosion, transform.position, transform.rotation) as GameObject;
+        Invoke("Exploded", 0.25f);
     }
 
     void Exploded() {
         if(Health == 0) {
             StartCoroutine(FadeTo(0.0f, 1.0f));
+        }else{
+            Destroy(exploding);
         }
     }
 
