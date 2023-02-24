@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     public List<Sprite> sprites;
 
-    void Init()
+    public void Init()
     {
         ShipController shipCtrl = GetComponent<ShipController>();
         shipCtrl.sprites = sprites;
