@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     private GameObject player;
     private Vector3 playerPos;
     private ShipController shipCtrl;
+    private Vector3 auxVec;
 
     public void Init(List<Sprite> sprites)
     {
@@ -23,13 +24,9 @@ public class EnemyController : MonoBehaviour
     {
         playerPos = player.transform.position;
 
-        float angle = getAngle(playerPos);
-        float abs = Mathf.Abs(angle);
+        float giro = getGiroToPlayer();
 
-        float giro = angle / abs;
-        if(abs < 25) giro = giro / (2.5f - (abs/10));
-
-        Debug.Log("giro: " + giro);
+        float distPlayer = (target - transform.position)
 
         object[] args = new object[2];
         args[0] = 0f;
@@ -39,9 +36,29 @@ public class EnemyController : MonoBehaviour
 
     float getAngle(Vector3 target){
         Vector3 vec = new Vector3();
-        vec = Quaternion.Euler(0, 0, -90) * (target - transform.position);
+        // grava vetor de target para usar em outras contas.
+        auxVec = (target - transform.position);
+        // rotaciona vetor para ficar igual a posição 0 do barco.
+        vec = Quaternion.Euler(0, 0, 90) * auxVec;
+        // retorna ângulo final
+        return Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
+    }
 
-        return -(Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg);
+    float deltaAngle(Vector3 target){
+        return Mathf.DeltaAngle(getAngle(target), shipCtrl.ship.transform.eulerAngles.z);
+    }
+
+    float getGiroToPlayer(){
+        // Calcula giro para olhar player.
+        float angle = deltaAngle(playerPos);
+        float abs = Mathf.Abs(angle);
+
+        float giro = angle / abs;
+        if(abs < 25f) giro = giro / ((25f - abs)/10f + 1f);
+        // Debug.Log("angle: " + angle);
+        // Debug.Log("abs: " + abs);
+        // Debug.Log("giro: " + giro);
+        return giro;
     }
 
     void OnTriggerEnter2D(Collider2D collider){
