@@ -149,6 +149,7 @@ public class ShipController : MonoBehaviour
         
         foreach (ContactPoint2D contactPoint in contactPoints)
         {
+            if (collision.gameObject.CompareTag("CannonBall")) break;
             if (Math.Abs(contactPoint.normal.x + ship.transform.up.x) < 0.2
             && Math.Abs(contactPoint.normal.y + ship.transform.up.y) < .2 ) {
                 blocked = false;
