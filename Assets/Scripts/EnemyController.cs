@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class EnemyController : MonoBehaviour
 {
 
     private GameObject player;
-    private Vector2 playerPos;
+    private Vector3 playerPos;
     private ShipController shipCtrl;
 
     public void Init(List<Sprite> sprites)
@@ -18,27 +19,40 @@ public class EnemyController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         playerPos = player.transform.position;
-        Debug.Log("Target rotation:" + (playerPos - transform.position));
-        Debug.Log("Ship rotation:" + .transform.back));
+
+        float angle = getAngle(playerPos);
+        float abs = Mathf.Abs(angle);
+
+        float giro = angle / abs;
+        if(abs < 25) giro = giro / (2.5f - (abs/10));
+
+        Debug.Log("giro: " + giro);
 
         object[] args = new object[2];
         args[0] = 0f;
-        args[1] = .5f;
+        args[1] = giro;
         shipCtrl.Mover(args);
     }
 
-    void OnTriggerEnter(Collision2D collision){
+    float getAngle(Vector3 target){
+        Vector3 vec = new Vector3();
+        vec = Quaternion.Euler(0, 0, -90) * (target - transform.position);
+
+        return -(Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg);
+    }
+
+    void OnTriggerEnter2D(Collider2D collider){
         
     }
 
-    void OnTriggerStay(Collision2D collision){
+    void OnTriggerStay2D(Collider2D collider){
         
     }
 
-    void OnTriggerLeave(Collision2D collision){
+    void OnTriggerLeave2D(Collider2D collider){
         
     }
 }

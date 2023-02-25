@@ -28,7 +28,8 @@ public class GameController : MonoBehaviour
 
         UpdateTime();
         UpdateScore();
-        InvokeRepeating("spawnEnemy", 0f, (float) spawn );
+        //InvokeRepeating("spawnEnemy", 0f, (float) spawn );
+        Invoke("spawnEnemy", 0f);
     }
 
     void Update()
@@ -55,16 +56,19 @@ public class GameController : MonoBehaviour
     }
 
     int getRandomSP(){
-        int point = UnityEngine.Random.Range(0, spawnPoints.Count-1);
+        int point = UnityEngine.Random.Range(0, spawnPoints.Count);
         if(point == lastSpawn) return getRandomSP();
+        if(spawnPoints[point].GetComponent<SpawnPointCtrl>().occupied) return getRandomSP();
         return lastSpawn = point;
     }   
 
     void spawnEnemy() {
         int point = getRandomSP();
-        GameObject enemy = Instantiate(shipPrefab, spawnPoints[point].position, spawnPoints[point].rotation);
+        GameObject enemy = Instantiate(shipPrefab, spawnPoints[point].position, Quaternion.identity);
         EnemyController enemyScript = enemy.AddComponent<EnemyController>();
-        enemy.tag = enemyTags[UnityEngine.Random.Range(0, enemyTags.Length-1)];
+        ShipController shipScript = enemy.GetComponent<ShipController>();
+        shipScript.ship.transform.rotation = spawnPoints[point].rotation;
+        enemy.tag = enemyTags[UnityEngine.Random.Range(0, enemyTags.Length)];
         if(enemy.tag == "Shooter"){
             enemyScript.Init(shooterSprites);
         }else if(enemy.tag == "Chaser"){

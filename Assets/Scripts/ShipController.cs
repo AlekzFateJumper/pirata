@@ -16,8 +16,8 @@ public class ShipController : MonoBehaviour
     public Transform canhaoFrontal;
     public List<Transform> canhaoDir;
     public List<Transform> canhaoEsq;
-    public Rigidbody2D shipBody;
 
+    private Rigidbody2D shipBody;
     private int Health;
     private float Andar;
     private float Girar;
@@ -143,6 +143,7 @@ public class ShipController : MonoBehaviour
     }
 
     void CollideStay (Collision2D collision) {
+        if (collision.gameObject.CompareTag("CannonBall")) return;
         ContactPoint2D[] contactPoints = new ContactPoint2D[collision.contactCount];
         collision.GetContacts(contactPoints);
         
@@ -164,6 +165,8 @@ public class ShipController : MonoBehaviour
         cBall.GetComponent<cBallCtrl>().setOrigin(GetInstanceID(), tag);
         cBall.GetComponent<Rigidbody2D>().AddForce(canhaoFrontal.right * 1000);
         cannonWait[0] = .5f;
+        AudioSource audio = canhaoFrontal.GetComponent<AudioSource>();
+        if (audio != null) audio.Play();
     }
 
     void TiroLateral (bool direita) {
@@ -174,12 +177,15 @@ public class ShipController : MonoBehaviour
             cannonWait[1] = .5f;
         } else if (cannonWait[2] > 0) return;
         else cannonWait[2] = .5f;
-
+        
         foreach (var cannon in cannons) {
             GameObject cBall = Instantiate(cannonBall, new Vector3(cannon.position.x, cannon.position.y, cannon.position.z),cannon.rotation) as GameObject;
             cBall.GetComponent<cBallCtrl>().setOrigin(GetInstanceID(), tag);
             cBall.GetComponent<Rigidbody2D>().AddForce(cannon.right * (direita?-1000:1000));
         }
+
+        AudioSource audio = cannons[0].GetComponent<AudioSource>();
+        if (audio != null) audio.Play();
     }
 
     public void setSprites(List<Sprite> s){
