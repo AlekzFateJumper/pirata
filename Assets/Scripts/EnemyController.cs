@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
     private bool desviar;
     private float giro;
     private float veloc;
+    private float deltaToPlayer;
+    private bool pInRange;
 
     public void Init(List<Sprite> sprites)
     {
@@ -22,6 +24,8 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         shipColliderId = shipCtrl.ship.GetComponent<Collider2D>().GetInstanceID();
         desviar = false;
+        deltaToPlayer = 0f;
+        pInRange = false;
         giro = 0f;
         veloc = 0f;
     }
@@ -33,12 +37,16 @@ public class EnemyController : MonoBehaviour
 
         if(!desviar){
             giro = getGiroToPlayer();
+            if(pInRange && shipCtrl.tag == "Shooter") veloc = 0f;
+            else veloc = 1f;
         }
 
         object[] args = new object[2];
-        args[0] = andar;
+        args[0] = veloc;
         args[1] = giro;
         shipCtrl.Mover(args);
+        Debug.Log("Mover: " + args);
+        Debug.Log("Desviar: " + desviar);
     }
 
     float getAngle(Vector3 target){
@@ -55,20 +63,13 @@ public class EnemyController : MonoBehaviour
 
     float getGiroToPlayer(){
         // Calcula giro para olhar player.
-        float angle = deltaAngle(playerPos);
-        float abs = Mathf.Abs(angle);
+        deltaToPlayer = deltaAngle(playerPos);
+        float abs = Mathf.Abs(deltaToPlayer);
 
-        float giro = angle / abs;
+        float giro = Mathf.Sign(deltaToPlayer);
         if(abs < 25f) giro = giro / ((25f - abs)/10f + 1f);
-        // Debug.Log("angle: " + angle);
-        // Debug.Log("abs: " + abs);
-        // Debug.Log("giro: " + giro);
-        return giro;
-    }
 
-    void OnTriggerEnter2D(Collider2D collider){
-        if(collider.GetInstanceID() == shipColliderId) return;
-        Debug.Log("Enter: " + collider.name);
+        return giro;
     }
 
     void OnTriggerStay2D(Collider2D collider){
@@ -82,20 +83,24 @@ public class EnemyController : MonoBehaviour
         if(collider.tag != "Player"){
             if ( Mathf.Abs(angle) < 20 ){
                 desviar = true;
-                
+                veloc = 0f;
             }else if( Mathf.Abs(angle) > 85 ){
                 desviar = false;
             }
+            if(desviar){
+                if(Mathf.Abs(angle) > 40){
+                    giro = -Mathf.Sign(angle);
+                    veloc = 1f;
+                }else if(Mathf.Abs(angle) > 20){
+                    giro = -Mathf.Sign(angle);
+                    veloc = dist.distance > 1f ? 0.5f : 0f;
+                }
+            }
         }else{
+            pInRange = true;
         }
 
         Debug.Log("Stay: " + collider.name);
         Debug.Log("angle: " + angle);
-
-    }
-
-    void OnTriggerLeave2D(Collider2D collider){
-        if(collider.GetInstanceID() == shipColliderId) return;
-        Debug.Log("Leave: " + collider.name);
     }
 }
