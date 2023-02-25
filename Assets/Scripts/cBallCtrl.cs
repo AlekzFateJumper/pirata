@@ -6,6 +6,7 @@ using UnityEngine;
 public class cBallCtrl : MonoBehaviour
 {
     public int origin;
+    public string originTag;
 
     private Rigidbody2D rbd;
 
@@ -18,10 +19,11 @@ public class cBallCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(rbd.velocity == Vector2.zero) Destroy(gameObject);
+        if(rbd.velocity.magnitude < 0.5f) Destroy(gameObject);
     }
 
-    public void setOrigin(int id){
+    public void setOrigin(int id, string tag){
         origin = id;
+        originTag = tag;
     }
 }
