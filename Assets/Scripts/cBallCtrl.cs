@@ -19,7 +19,7 @@ public class cBallCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(rbd.velocity.magnitude < 0.5f) Destroy(gameObject);
+        if(rbd.velocity.magnitude < .5f) Destroy(gameObject);
     }
 
     public void setOrigin(int id, string tag){

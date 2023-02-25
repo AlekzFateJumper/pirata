@@ -66,7 +66,7 @@ public class ShipController : MonoBehaviour
         Explode();
     }
 
-    void Explode(float t = 0.25f) {
+    void Explode(float t = .25f) {
         if(exploding == null) exploding = Instantiate(explosion, transform.position, transform.rotation) as GameObject;
         if(!IsInvoking("ApagaFogo"))
             Invoke("Exploded", t);
@@ -74,8 +74,8 @@ public class ShipController : MonoBehaviour
 
     void Exploded() {
         if(Health == 0) {
-            StartCoroutine(FadeTo(0.0f, 1.0f));
-            Invoke("ApagaFogo", 0.8f);
+            StartCoroutine(FadeTo(.0f, 1.0f));
+            Invoke("ApagaFogo", .8f);
         }else{
             ApagaFogo();
         }
