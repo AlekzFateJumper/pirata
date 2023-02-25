@@ -180,7 +180,7 @@ SubShader {
             float4 vPosition = UnityObjectToClipPos(vert);
 
             float weight = lerp(_WeightNormal, _WeightBold, bold) / 4.0;
-            weight = (weight + _FaceDilate) * _ScaleRatioA * 0.5;
+            weight = (weight + _FaceDilate) * _ScaleRatioA * .5;
 
         #if (UNDERLAY_ON || UNDERLAY_INNER)
             float4 underlayColor = _UnderlayColor;
@@ -248,7 +248,7 @@ SubShader {
             faceColor = GetColor(sd, faceColor, outlineColor, outline, softness);
 
         #if BEVEL_ON
-            float3 dxy = float3(0.5 / _TextureWidth, 0.5 / _TextureHeight, 0);
+            float3 dxy = float3(.5 / _TextureWidth, .5 / _TextureHeight, 0);
             float3 n = GetSurfaceNormal(input.atlas, weight, dxy);
 
             float3 bump = UnpackNormal(tex2D(_BumpMap, input.textures.xy + float2(_FaceUVSpeedX, _FaceUVSpeedY) * _Time.y)).xyz;
@@ -269,7 +269,7 @@ SubShader {
         #if (UNDERLAY_ON || UNDERLAY_INNER)
             float bScale = scale;
             bScale /= 1 + ((_UnderlaySoftness * _ScaleRatioC) * bScale);
-            float bBias = (0.5 - weight) * bScale - 0.5 - ((_UnderlayDilate * _ScaleRatioC) * 0.5 * bScale);
+            float bBias = (.5 - weight) * bScale - .5 - ((_UnderlayDilate * _ScaleRatioC) * .5 * bScale);
         #endif
 
         #if UNDERLAY_ON
@@ -289,7 +289,7 @@ SubShader {
 
             // Alternative implementation to UnityGet2DClipping with support for softness.
         #if UNITY_UI_CLIP_RECT
-            float2 maskZW = 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + (1 / scale));
+            float2 maskZW = .25 / (.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + (1 / scale));
             half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(input.mask.xy)) * maskZW);
             faceColor *= m.x * m.y;
         #endif

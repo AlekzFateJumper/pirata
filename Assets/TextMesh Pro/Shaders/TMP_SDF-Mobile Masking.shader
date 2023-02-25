@@ -142,13 +142,13 @@ SubShader {
 			if(UNITY_MATRIX_P[3][3] == 0) scale = lerp(abs(scale) * (1 - _PerspectiveFilter), scale, abs(dot(UnityObjectToWorldNormal(input.normal.xyz), normalize(WorldSpaceViewDir(vert)))));
 
 			float weight = lerp(_WeightNormal, _WeightBold, bold) / 4.0;
-			weight = (weight + _FaceDilate) * _ScaleRatioA * 0.5;
+			weight = (weight + _FaceDilate) * _ScaleRatioA * .5;
 
 			float layerScale = scale;
 
 			scale /= 1 + (_OutlineSoftness * _ScaleRatioA * scale);
-			float bias = (0.5 - weight) * scale - 0.5;
-			float outline = _OutlineWidth * _ScaleRatioA * 0.5 * scale;
+			float bias = (.5 - weight) * scale - .5;
+			float outline = _OutlineWidth * _ScaleRatioA * .5 * scale;
 
 			float opacity = input.color.a;
 					#if (UNDERLAY_ON | UNDERLAY_INNER)
@@ -184,7 +184,7 @@ SubShader {
 				outlineColor,
 				float4(input.texcoord0.x, input.texcoord0.y, maskUV.x, maskUV.y),
 				half4(scale, bias - outline, bias + outline, bias),
-				half4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy)),
+				half4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, .25 / (.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy)),
 			#if (UNDERLAY_ON | UNDERLAY_INNER)
 				float4(input.texcoord0 + layerOffset, input.color.a, 0),
 				half2(layerScale, layerBias),

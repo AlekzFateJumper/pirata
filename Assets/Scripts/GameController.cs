@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
 
     private float timeLeft;
     private String[] enemyTags;
+    private int lastSpawn = -1;
 
     void Start()
     {
@@ -53,8 +54,15 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
+    int getRandomSP(){
+        int point = UnityEngine.Random.Range(0, spawnPoints.Count-1);
+        if(point == lastSpawn) return getRandomSP();
+        return lastSpawn = point;
+    }   
+
     void spawnEnemy() {
-        GameObject enemy = Instantiate(shipPrefab, spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count-1)].position, Quaternion.identity);
+        int point = getRandomSP();
+        GameObject enemy = Instantiate(shipPrefab, spawnPoints[point].position, spawnPoints[point].rotation);
         EnemyController enemyScript = enemy.AddComponent<EnemyController>();
         enemy.tag = enemyTags[UnityEngine.Random.Range(0, enemyTags.Length-1)];
         if(enemy.tag == "Shooter"){

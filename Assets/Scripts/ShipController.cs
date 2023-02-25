@@ -16,8 +16,8 @@ public class ShipController : MonoBehaviour
     public Transform canhaoFrontal;
     public List<Transform> canhaoDir;
     public List<Transform> canhaoEsq;
+    public Rigidbody2D shipBody;
 
-    private Rigidbody2D shipBody;
     private int Health;
     private float Andar;
     private float Girar;
@@ -59,25 +59,30 @@ public class ShipController : MonoBehaviour
     }
 
     void Hit() {
-
+        if(Health == 0) return;
         if(--Health < 0) Health = 0;
-        Debug.Log("Health: " + Health);
         shipSprite.sprite = sprites[Health];
         updateLifeBar();
         Explode();
     }
 
-    void Explode() {
-        exploding = Instantiate(explosion, transform.position, transform.rotation) as GameObject;
-        Invoke("Exploded", 0.25f);
+    void Explode(float t = 0.25f) {
+        if(exploding == null) exploding = Instantiate(explosion, transform.position, transform.rotation) as GameObject;
+        if(!IsInvoking("ApagaFogo"))
+            Invoke("Exploded", t);
     }
 
     void Exploded() {
         if(Health == 0) {
             StartCoroutine(FadeTo(0.0f, 1.0f));
+            Invoke("ApagaFogo", 0.8f);
         }else{
-            Destroy(exploding);
+            ApagaFogo();
         }
+    }
+
+    void ApagaFogo(){
+        Destroy(exploding);
     }
 
     void Naufragio() {
@@ -108,11 +113,17 @@ public class ShipController : MonoBehaviour
     void CollideEnter (Collision2D collision) {
         if (collision.gameObject.CompareTag("CannonBall")) {
             // Para não ser atingido pela própria bala de canhão:
-            if(collision.gameObject.GetComponent<cBallCtrl>().origin == GetInstanceID()) return;
-            // Toma dano:
-            Hit();
+            cBallCtrl cBC = collision.gameObject.GetComponent<cBallCtrl>();
+            if(cBC.origin == GetInstanceID()) return;
+            if(cBC.originTag == "Player"){
+                // Aumenta o score caso acertar e tripica o valor se for o tiro final.
+                int score = PlayerPrefs.GetInt("score") + (( tag == "Chaser" ? 15 : 25 ) * ( Health > 1 ? 1 : 3 ));
+                PlayerPrefs.SetInt("score", score);
+            }
             // Destrói a bola de canhão:
             Destroy(collision.gameObject);
+            // Toma dano:
+            Hit();
         } else if (collision.gameObject.name == "Ship") {
             // Se um barco colidir com outro barco, ambos explodem.
             Health = 0;
@@ -137,8 +148,8 @@ public class ShipController : MonoBehaviour
         
         foreach (ContactPoint2D contactPoint in contactPoints)
         {
-            if (Math.Abs(contactPoint.normal.x + ship.transform.up.x) < 0.1
-            && Math.Abs(contactPoint.normal.y + ship.transform.up.y) < 0.1 ) {
+            if (Math.Abs(contactPoint.normal.x + ship.transform.up.x) < 0.2
+            && Math.Abs(contactPoint.normal.y + ship.transform.up.y) < .2 ) {
                 blocked = false;
             } else {
                 blocked = true;
@@ -150,9 +161,9 @@ public class ShipController : MonoBehaviour
     void TiroFrontal () {
         if(cannonWait[0] > 0) return;
         GameObject cBall = Instantiate(cannonBall, new Vector3(canhaoFrontal.position.x, canhaoFrontal.position.y, canhaoFrontal.position.z),canhaoFrontal.rotation) as GameObject;
-        cBall.GetComponent<cBallCtrl>().setOrigin(GetInstanceID());
+        cBall.GetComponent<cBallCtrl>().setOrigin(GetInstanceID(), tag);
         cBall.GetComponent<Rigidbody2D>().AddForce(canhaoFrontal.right * 1000);
-        cannonWait[0] = 0.5f;
+        cannonWait[0] = .5f;
     }
 
     void TiroLateral (bool direita) {
@@ -160,13 +171,13 @@ public class ShipController : MonoBehaviour
         if (direita) {
             if (cannonWait[1] > 0) return;
             cannons = canhaoDir;
-            cannonWait[1] = 0.5f;
+            cannonWait[1] = .5f;
         } else if (cannonWait[2] > 0) return;
-        else cannonWait[2] = 0.5f;
+        else cannonWait[2] = .5f;
 
         foreach (var cannon in cannons) {
             GameObject cBall = Instantiate(cannonBall, new Vector3(cannon.position.x, cannon.position.y, cannon.position.z),cannon.rotation) as GameObject;
-            cBall.GetComponent<cBallCtrl>().setOrigin(GetInstanceID());
+            cBall.GetComponent<cBallCtrl>().setOrigin(GetInstanceID(), tag);
             cBall.GetComponent<Rigidbody2D>().AddForce(cannon.right * (direita?-1000:1000));
         }
     }
@@ -179,7 +190,7 @@ public class ShipController : MonoBehaviour
     {
         Renderer rend = transform.GetComponentInChildren<Renderer>();
         float alpha = rend.material.color.a;
-        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+        for (float t = .0f; t < 1.0f; t += Time.deltaTime / aTime)
         {
             Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha,aValue,t));
             rend.material.color = newColor;

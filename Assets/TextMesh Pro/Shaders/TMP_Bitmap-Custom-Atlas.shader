@@ -88,7 +88,7 @@ SubShader{
 			output.x = floor(uv / 4096);
 			output.y = uv - 4096 * output.x;
 
-			return output * 0.001953125;
+			return output * .001953125;
 		}
 
 		v2f vert (appdata_t v)
@@ -114,7 +114,7 @@ SubShader{
 
 			// Clamp _ClipRect to 16bit.
 			float4 clampedRect = clamp(_ClipRect, -2e10, 2e10);
-			OUT.mask = float4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
+			OUT.mask = float4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, .25 / (.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
 
 			return OUT;
 		}
