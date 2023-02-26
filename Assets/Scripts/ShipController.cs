@@ -23,7 +23,7 @@ public class ShipController : MonoBehaviour
     private int Health;
     private float Andar;
     private float Girar;
-    private bool blocked;
+    public bool blocked;
     public float[] cannonWait;
     private GameObject exploding;
 
@@ -132,12 +132,15 @@ public class ShipController : MonoBehaviour
             Health = 0;
             updateLifeBar();
             Explode();
+        } else if (collision.gameObject.name == "MainCamera" && deltaAngle(getAngle(collision.transform.position)) < 150 ){
+                blocked = false;
         } else {
             blocked = true;
             var rb2 = GetComponent<Rigidbody2D>();
             rb2.velocity = Vector2.zero;
             var vetor = (ship.transform.up * speed * Time.deltaTime);
             rb2.AddForce(vetor);
+
         }
     }
 
@@ -161,6 +164,18 @@ public class ShipController : MonoBehaviour
                 break;
             }
         }
+    }
+
+    float getAngle(Vector3 target){
+        Vector3 vec = new Vector3();
+        // rotaciona vetor para ficar igual a posição 0 do barco.
+        vec = Quaternion.Euler(0, 0, 90) * (target - transform.position);
+        // retorna ângulo final
+        return Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
+    }
+
+    float deltaAngle(float target){
+        return Mathf.DeltaAngle(target, ship.transform.eulerAngles.z);
     }
 
     public void TiroFrontal () {

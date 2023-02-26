@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour
     }
 
     void MoveControl(){
-        float playerDist = Vector3.Distance(playerPos, shipCtrl.ship.transform.position);
+        float playerDist = Vector3.Distance(playerPos, transform.position);
 
         if(playerDist <= 2f && shipCtrl.tag == "Shooter"){
             veloc = 0f;
@@ -86,50 +86,15 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void CheckForWalls(){
-        Collider2D collider = getNearestObj();
-        Debug.Log("Mais perto: " + collider.name);
-
-        var dist = collider.Distance(shipCtrl.ship.GetComponent<Collider2D>());
-        var angle = deltaAngle(collider.transform.position);
-        var abs = Mathf.Abs(angle);
-
-        if ( abs <= 85 ){
-            desviar = true;
-            giro = (abs > 1f ? Mathf.Sign(angle) : angle);
-            if(abs < 20){
-                veloc = dist.distance > 1.5f ? .2f : 0f;
-            } else if(abs < 45){
-                veloc = dist.distance > 1.5f ? .5f : 0f;
-            } else {
-                veloc = dist.distance > 1.5f ? 1f : 0f;
-            }
-        }else{
-            Debug.Log("Mais que 85.");
-            desviar = false;
-        }
-    }
-
-    Collider2D? getNearestObj(){
-        float minDist = Mathf.Infinity;
-        Collider2D? collider = null;
-        foreach(var obj in nearObjs) {
-            var dist = obj.Distance(shipCtrl.ship.GetComponent<Collider2D>()).distance;
-            if(dist < minDist){
-                minDist = dist;
-                collider = obj;
-            }
-        }
-        return collider;
-    }
-
     void MoveFreeAngle(){
         float angle = freeAngle();
+        Debug.Log("Ship: " + tag + " / " + transform.position + "\r\nAngle: " + angle);
         giro = getGiroToAngle(angle);
     }
 
     float freeAngle(){
-        float way = transform.rotation.z;
+        desviar = shipCtrl.blocked;
+        float way = shipCtrl.ship.transform.eulerAngles.z;
         float playerAngle = getAngle(playerPos);
         if(nearObjs.Count == 1){
             float objAng = getAngle(nearObjs[0].transform.position);
@@ -141,37 +106,30 @@ public class EnemyController : MonoBehaviour
             float a1 = getAngle(nearObjs[1].transform.position);
             if(Mathf.DeltaAngle(way, a0) < 50f ||
                Mathf.DeltaAngle(way, a1) < 50f) desviar = true;
-            if(Mathf.DeltaAngle(a1, a0) <= 180f){
-                return (Mathf.LerpAngle(a0, a1, .5f));
-            }else{
-                return invertAngle(Mathf.LerpAngle(a0, a1, .5f));
-            }
+            else return way;
+            return invertAngle(Mathf.LerpAngle(a0, a1, .5f));
         }
-        float maxRot = Mathf.Infinity;
+        float maxRot = 360f;
         float nearAngle = way;
         foreach(var obj in nearObjs) {
             float angle = getAngle(obj.transform.position);
             float inv = invertAngle(angle);
             float near = Mathf.DeltaAngle(inv, playerAngle);
-            if( Mathf.DeltaAngle(way, angle) < 30f ) desviar = true;
+            if( Mathf.DeltaAngle(way, angle) < 50f ) desviar = true;
             if( Mathf.Abs(near) < Mathf.Abs(maxRot) ){
                 maxRot = near;
-                nearAngle = angle;
+                nearAngle = inv;
             }
         }
-        return invertAngle(nearAngle);
+        return nearAngle;
     }
 
     float getAngle(Vector3 target){
         Vector3 vec = new Vector3();
         // rotaciona vetor para ficar igual a posição 0 do barco.
-        vec = Quaternion.Euler(0, 0, 90) * (target - shipCtrl.ship.transform.position);
+        vec = Quaternion.Euler(0, 0, 90) * (target - shipCtrl.transform.position);
         // retorna ângulo final
         return Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
-    }
-
-    float deltaAngle(Vector3 target){
-        return Mathf.DeltaAngle(getAngle(target), shipCtrl.ship.transform.eulerAngles.z);
     }
 
     float deltaAngle(float target){
@@ -184,7 +142,7 @@ public class EnemyController : MonoBehaviour
 
     float getGiroToPlayer(){
         // Calcula giro para olhar player.
-        deltaToPlayer = deltaAngle(playerPos);
+        deltaToPlayer = deltaAngle(getAngle(playerPos));
         float abs = Mathf.Abs(deltaToPlayer);
         float g = Mathf.Sign(deltaToPlayer);
         if(abs < 25f) g = g / ((25f - abs)/10f + 1f);
