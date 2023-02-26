@@ -37,16 +37,14 @@ public class EnemyController : MonoBehaviour
     {
         playerPos = player.transform.position;
 
-        if(nearObjs.Count > 0) MoveFreeAngle();
-        else desviar = false;
-
-        if(!desviar) MoveControl();
+        if(nearObjs.Count > 0) Desviar();
+        else MoveControl();
 
         object[] args = new object[2];
         args[0] = veloc;
         args[1] = giro;
         shipCtrl.Mover(args);
-        Debug.Log("Desviar: " + desviar + "\r\nMover: " + veloc + " / " + giro + "\r\nObjs: " + nearObjs.Count);
+        Debug.Log("Blocked: " + shipCtrl.blocked + "\r\nMover: " + veloc + " / " + giro + "\r\nObjs: " + nearObjs.Count);
     }
 
     void MoveControl(){
@@ -86,14 +84,13 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void MoveFreeAngle(){
+    void Desviar(){
         float angle = freeAngle();
         Debug.Log("Ship: " + tag + " / " + transform.position + "\r\nAngle: " + angle);
         giro = getGiroToAngle(angle);
     }
 
     float freeAngle(){
-        desviar = shipCtrl.blocked;
         float way = shipCtrl.ship.transform.eulerAngles.z;
         float playerAngle = getAngle(playerPos);
         if(nearObjs.Count == 1){
@@ -167,6 +164,17 @@ public class EnemyController : MonoBehaviour
         // Debug.Log("Enter: " + collider.name + "\r\nTag: " + collider.tag);
 
         nearObjs.Add(collider);
+    }
+
+    void OnTriggerStay2D(Collider2D collider){
+        if( collider.GetInstanceID() == shipColliderId ||
+            collider.tag == "Respawn" ||
+            collider.tag == "Player"
+        ) return;
+
+        var dist = collider.Distance(shipCtrl.ship.GetComponent<Collider2D>()).distance;
+
+        veloc = Mathf.Clamp(dist - 1.5f, 0f, 1f);
     }
 
     void OnTriggerExit2D(Collider2D collider){

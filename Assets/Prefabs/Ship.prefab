@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 7713947172804467629}
   - component: {fileID: 2365360292568541904}
   - component: {fileID: 6438596718275978678}
-  - component: {fileID: 5011143555137498070}
+  - component: {fileID: 543625776067897757}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -380,6 +380,8 @@ MonoBehaviour:
   - {fileID: 8212161411591682478}
   - {fileID: 4340731332426396777}
   explosionAudio: {fileID: 5449534523303471754}
+  blocked: 0
+  cannonWait: []
 --- !u!50 &6438596718275978678
 Rigidbody2D:
   serializedVersion: 4
@@ -401,8 +403,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &5011143555137498070
-CircleCollider2D:
+--- !u!70 &543625776067897757
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -414,9 +416,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.5
+  m_Offset: {x: 0, y: -1.5}
+  m_Size: {x: 0.5, y: 2.5}
+  m_Direction: 0
 --- !u!1 &3115386200479471128
 GameObject:
   m_ObjectHideFlags: 0

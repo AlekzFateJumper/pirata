@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour
     private float timeLeft;
     private String[] enemyTags;
     private int lastSpawn = -1;
+    private int totalSpawnShooter;
+    private int totalSpawnChaser;
 
     void Start()
     {
@@ -25,6 +27,8 @@ public class GameController : MonoBehaviour
         int spawn = PlayerPrefs.GetInt("sTime");
         PlayerPrefs.SetInt("score", 0);
         enemyTags = new String[2] {"Shooter", "Chaser"};
+        totalSpawnShooter = 0;
+        totalSpawnChaser = 0;
 
         UpdateTime();
         UpdateScore();
@@ -71,8 +75,10 @@ public class GameController : MonoBehaviour
         enemy.tag = enemyTags[UnityEngine.Random.Range(0, enemyTags.Length)];
         if(enemy.tag == "Shooter"){
             enemyScript.Init(shooterSprites);
+            enemy.name = "Shooter" + totalSpawnShooter++;
         }else if(enemy.tag == "Chaser"){
             enemyScript.Init(chaserSprites);
+            enemy.name = "Chaser" + totalSpawnChaser++;
         }
     }
 }

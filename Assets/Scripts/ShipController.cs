@@ -132,8 +132,6 @@ public class ShipController : MonoBehaviour
             Health = 0;
             updateLifeBar();
             Explode();
-        } else if (collision.gameObject.name == "MainCamera" && deltaAngle(getAngle(collision.transform.position)) < 150 ){
-                blocked = false;
         } else {
             blocked = true;
             var rb2 = GetComponent<Rigidbody2D>();
@@ -152,10 +150,9 @@ public class ShipController : MonoBehaviour
         if (collision.gameObject.CompareTag("CannonBall")) return;
         ContactPoint2D[] contactPoints = new ContactPoint2D[collision.contactCount];
         collision.GetContacts(contactPoints);
-        
+
         foreach (ContactPoint2D contactPoint in contactPoints)
         {
-            if (collision.gameObject.CompareTag("CannonBall")) break;
             if (Math.Abs(contactPoint.normal.x + ship.transform.up.x) < 0.2
             && Math.Abs(contactPoint.normal.y + ship.transform.up.y) < .2 ) {
                 blocked = false;
@@ -163,6 +160,16 @@ public class ShipController : MonoBehaviour
                 blocked = true;
                 break;
             }
+        }
+
+        Debug.Log("Source: " + name + "/" + tag + " Name: " + collision.gameObject.name + " Tag: " + collision.gameObject.tag +
+            "\r\nBlocked: " + blocked + " contactCount: " + collision.contactCount);
+
+        float ang = getAngle(collision.transform.position);
+        float dang = deltaAngle(ang);
+        Debug.Log("ang: " + ang + " dang: " + dang);
+        if (dang > 150 || dang < -150){
+            blocked = false;
         }
     }
 
