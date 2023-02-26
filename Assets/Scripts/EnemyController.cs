@@ -125,7 +125,7 @@ public class EnemyController : MonoBehaviour
 
     void MoveFreeAngle(){
         float angle = freeAngle();
-
+        giro = getGiroToAngle(angle);
     }
 
     float freeAngle(){
@@ -133,15 +133,17 @@ public class EnemyController : MonoBehaviour
         float playerAngle = getAngle(playerPos);
         if(nearObjs.Count == 1){
             float objAng = getAngle(nearObjs[0].transform.position);
-            if(Mathf.DeltaAngle(objAng, playerAngle) >= 80) return playerAngle;
-            else return invertAngle(objAng);
+            if(Mathf.DeltaAngle(way, objAng) < 50f) desviar = true;
+            if(Mathf.DeltaAngle(objAng, playerAngle) >= 80f) return playerAngle;
+            return invertAngle(objAng);
         }else if(nearObjs.Count == 2){
             float a0 = getAngle(nearObjs[0].transform.position);
             float a1 = getAngle(nearObjs[1].transform.position);
+            if(Mathf.DeltaAngle(way, a0) < 50f || Mathf.DeltaAngle(way, a1) < 50f) desviar = true;
             if(Mathf.DeltaAngle(a1, a0) <= 180f){
                 return invertAngle(Mathf.LerpAngle(a0, a1, .5f));
             }else{
-                return invertAngle(Mathf.LerpAngle(a1, a0, .5f));
+                return Mathf.LerpAngle(a0, a1, .5f);
             }
         }
         float maxRot = Mathf.Infinity;
