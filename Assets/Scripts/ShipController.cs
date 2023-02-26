@@ -16,13 +16,15 @@ public class ShipController : MonoBehaviour
     public Transform canhaoFrontal;
     public List<Transform> canhaoDir;
     public List<Transform> canhaoEsq;
+    public AudioSource explosionAudio;
+
 
     private Rigidbody2D shipBody;
     private int Health;
     private float Andar;
     private float Girar;
     private bool blocked;
-    private float[] cannonWait;
+    public float[] cannonWait;
     private GameObject exploding;
 
     void Start()
@@ -53,8 +55,8 @@ public class ShipController : MonoBehaviour
         }
 
         for(var i = 0; i < 3; i++) {
-            if(cannonWait[i] > 0) cannonWait[i] -= Time.fixedDeltaTime;
-            if(cannonWait[i] < 0) cannonWait[i] = 0;
+            if(cannonWait[i] > 0f) cannonWait[i] -= Time.fixedDeltaTime;
+            if(cannonWait[i] < 0f) cannonWait[i] = 0f;
         }
     }
 
@@ -68,6 +70,7 @@ public class ShipController : MonoBehaviour
 
     void Explode(float t = .25f) {
         if(exploding == null) exploding = Instantiate(explosion, transform.position, transform.rotation) as GameObject;
+        if(Health == 0) playExplosion();
         if(!IsInvoking("ApagaFogo"))
             Invoke("Exploded", t);
     }
@@ -160,7 +163,7 @@ public class ShipController : MonoBehaviour
         }
     }
 
-    void TiroFrontal () {
+    public void TiroFrontal () {
         if(cannonWait[0] > 0) return;
         GameObject cBall = Instantiate(cannonBall, new Vector3(canhaoFrontal.position.x, canhaoFrontal.position.y, canhaoFrontal.position.z),canhaoFrontal.rotation) as GameObject;
         cBall.GetComponent<cBallCtrl>().setOrigin(GetInstanceID(), tag);
@@ -170,7 +173,7 @@ public class ShipController : MonoBehaviour
         if (audio != null) audio.Play();
     }
 
-    void TiroLateral (bool direita) {
+    public void TiroLateral (bool direita) {
         var cannons = canhaoEsq;
         if (direita) {
             if (cannonWait[1] > 0) return;
@@ -191,6 +194,10 @@ public class ShipController : MonoBehaviour
 
     public void setSprites(List<Sprite> s){
         sprites = new List<Sprite>(s);
+    }
+
+    public void playExplosion(){
+        if( explosionAudio != null ) explosionAudio.Play();
     }
 
     IEnumerator FadeTo(float aValue, float aTime)

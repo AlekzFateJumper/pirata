@@ -28,8 +28,8 @@ public class GameController : MonoBehaviour
 
         UpdateTime();
         UpdateScore();
-        //InvokeRepeating("spawnEnemy", 0f, (float) spawn );
-        Invoke("spawnEnemy", 0f);
+        InvokeRepeating("spawnEnemy", 0f, (float) spawn );
+        // Invoke("spawnEnemy", 0f);
     }
 
     void Update()
@@ -60,7 +60,7 @@ public class GameController : MonoBehaviour
         if(point == lastSpawn) return getRandomSP();
         if(spawnPoints[point].GetComponent<SpawnPointCtrl>().occupied) return getRandomSP();
         return lastSpawn = point;
-    }   
+    }
 
     void spawnEnemy() {
         int point = getRandomSP();
