@@ -16,6 +16,8 @@ public class NavTrigger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider){
         if( collider.tag == "Respawn" ||
             collider.tag == "Player" ||
+            collider.tag == "Trigger" ||
+            collider.tag == "CannonBall" ||
             collider.isTrigger
         ) return;
 
@@ -27,6 +29,8 @@ public class NavTrigger : MonoBehaviour
     void OnTriggerExit2D(Collider2D collider){
         if( collider.tag == "Respawn" ||
             collider.tag == "Player" ||
+            collider.tag == "Trigger" ||
+            collider.tag == "CannonBall" ||
             collider.isTrigger
         ) return;
 

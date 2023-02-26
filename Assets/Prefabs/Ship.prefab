@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 2356570570778036461}
   m_Layer: 0
   m_Name: Collider (-30,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,7 +175,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &2356570570778036461
 MonoBehaviour:
@@ -189,6 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &320675791724930161
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +204,7 @@ GameObject:
   - component: {fileID: 7878934652289080437}
   m_Layer: 0
   m_Name: Collider (105,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -236,7 +238,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &7878934652289080437
 MonoBehaviour:
@@ -250,6 +252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &448383421049692826
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +267,7 @@ GameObject:
   - component: {fileID: 7020657597685987879}
   m_Layer: 0
   m_Name: Collider (-165,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -297,7 +301,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &7020657597685987879
 MonoBehaviour:
@@ -311,6 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &594084795004125455
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,7 +511,7 @@ GameObject:
   - component: {fileID: 5546575537915349072}
   m_Layer: 0
   m_Name: Collider (165,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -539,7 +545,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &5546575537915349072
 MonoBehaviour:
@@ -553,6 +559,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &661297533774544074
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,7 +574,7 @@ GameObject:
   - component: {fileID: 2318388486999010640}
   m_Layer: 0
   m_Name: Collider (165,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -600,7 +608,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &2318388486999010640
 MonoBehaviour:
@@ -614,6 +622,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &862296343841460492
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,7 +637,7 @@ GameObject:
   - component: {fileID: 1259979191797061671}
   m_Layer: 0
   m_Name: Collider (105,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -661,7 +671,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &1259979191797061671
 MonoBehaviour:
@@ -675,6 +685,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &941396553391255119
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,7 +700,7 @@ GameObject:
   - component: {fileID: 6829132704386025880}
   m_Layer: 0
   m_Name: Collider (60,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -722,7 +734,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &6829132704386025880
 MonoBehaviour:
@@ -736,6 +748,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &978395487777103767
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,7 +763,7 @@ GameObject:
   - component: {fileID: 3436764728003974813}
   m_Layer: 0
   m_Name: Collider (60,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -783,7 +797,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &3436764728003974813
 MonoBehaviour:
@@ -797,6 +811,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &1054727992585449512
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +826,7 @@ GameObject:
   - component: {fileID: 390486015308240046}
   m_Layer: 0
   m_Name: Collider (-150,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -844,7 +860,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &390486015308240046
 MonoBehaviour:
@@ -858,6 +874,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &1194759196422243722
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,7 +889,7 @@ GameObject:
   - component: {fileID: 7095711542119402584}
   m_Layer: 0
   m_Name: Collider (-15,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -905,7 +923,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &7095711542119402584
 MonoBehaviour:
@@ -919,6 +937,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &1444768714229933485
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,7 +952,7 @@ GameObject:
   - component: {fileID: 2176723711587448563}
   m_Layer: 0
   m_Name: Collider (30,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -966,7 +986,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &2176723711587448563
 MonoBehaviour:
@@ -980,6 +1000,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &1446921458515347424
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,7 +1015,7 @@ GameObject:
   - component: {fileID: 5384896209026705768}
   m_Layer: 0
   m_Name: Collider (-60,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1027,7 +1049,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &5384896209026705768
 MonoBehaviour:
@@ -1041,6 +1063,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &1688946157940651130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,7 +1078,7 @@ GameObject:
   - component: {fileID: 448635370588627037}
   m_Layer: 0
   m_Name: Collider (135,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1088,7 +1112,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &448635370588627037
 MonoBehaviour:
@@ -1102,6 +1126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &1751800285511690713
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1141,7 @@ GameObject:
   - component: {fileID: 6575163067341887455}
   m_Layer: 0
   m_Name: Collider (90,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1149,7 +1175,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &6575163067341887455
 MonoBehaviour:
@@ -1163,6 +1189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &2060006995626953262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1176,7 +1204,7 @@ GameObject:
   - component: {fileID: 647489631761104423}
   m_Layer: 0
   m_Name: Collider (-90,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1210,7 +1238,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &647489631761104423
 MonoBehaviour:
@@ -1224,6 +1252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &2135592678584110064
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,7 +1267,7 @@ GameObject:
   - component: {fileID: 632200446103407713}
   m_Layer: 0
   m_Name: Collider (150,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1271,7 +1301,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &632200446103407713
 MonoBehaviour:
@@ -1285,6 +1315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &2280348309970597923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,7 +1330,7 @@ GameObject:
   - component: {fileID: 7903463922678309450}
   m_Layer: 0
   m_Name: Collider (-165,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1332,7 +1364,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &7903463922678309450
 MonoBehaviour:
@@ -1346,6 +1378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &2309405166335216745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,7 +1393,7 @@ GameObject:
   - component: {fileID: 3675080635288930902}
   m_Layer: 0
   m_Name: Collider (120,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1393,7 +1427,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &3675080635288930902
 MonoBehaviour:
@@ -1407,6 +1441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &2321501520728212184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1420,7 +1456,7 @@ GameObject:
   - component: {fileID: 7636030843345479099}
   m_Layer: 0
   m_Name: Collider (-105,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1454,7 +1490,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &7636030843345479099
 MonoBehaviour:
@@ -1468,6 +1504,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &2369454126539676761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1481,7 +1519,7 @@ GameObject:
   - component: {fileID: 2208552310292556801}
   m_Layer: 0
   m_Name: Collider (-165,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1515,7 +1553,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &2208552310292556801
 MonoBehaviour:
@@ -1529,6 +1567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &2392706751386042548
 GameObject:
   m_ObjectHideFlags: 0
@@ -1542,7 +1582,7 @@ GameObject:
   - component: {fileID: 6544749349438609711}
   m_Layer: 0
   m_Name: Collider (30,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1576,7 +1616,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &6544749349438609711
 MonoBehaviour:
@@ -1590,6 +1630,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &2771797497772589031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1603,7 +1645,7 @@ GameObject:
   - component: {fileID: 4336580452334657187}
   m_Layer: 0
   m_Name: Collider (-135,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1637,7 +1679,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &4336580452334657187
 MonoBehaviour:
@@ -1651,6 +1693,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &2857267982823933981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1664,7 +1708,7 @@ GameObject:
   - component: {fileID: 1935830253298728844}
   m_Layer: 0
   m_Name: Collider (150,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1698,7 +1742,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &1935830253298728844
 MonoBehaviour:
@@ -1712,6 +1756,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &2931628487065473954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,7 +1771,7 @@ GameObject:
   - component: {fileID: 8692949929492158011}
   m_Layer: 0
   m_Name: Collider (-135,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1759,7 +1805,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &8692949929492158011
 MonoBehaviour:
@@ -1773,6 +1819,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &3085113773880965901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,7 +2009,7 @@ GameObject:
   - component: {fileID: 4863502261804181073}
   m_Layer: 0
   m_Name: Collider (-90,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1995,7 +2043,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &4863502261804181073
 MonoBehaviour:
@@ -2009,6 +2057,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &3487913056429285446
 GameObject:
   m_ObjectHideFlags: 0
@@ -2022,7 +2072,7 @@ GameObject:
   - component: {fileID: 6053312463255032448}
   m_Layer: 0
   m_Name: Collider (-75,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2056,7 +2106,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &6053312463255032448
 MonoBehaviour:
@@ -2070,6 +2120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &3952170397322407808
 GameObject:
   m_ObjectHideFlags: 0
@@ -2083,7 +2135,7 @@ GameObject:
   - component: {fileID: 1407320301879486182}
   m_Layer: 0
   m_Name: Collider (-45,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2117,7 +2169,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &1407320301879486182
 MonoBehaviour:
@@ -2131,6 +2183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &4030449102944244091
 GameObject:
   m_ObjectHideFlags: 0
@@ -2144,7 +2198,7 @@ GameObject:
   - component: {fileID: 6396874928381213662}
   m_Layer: 0
   m_Name: Collider (60,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2178,7 +2232,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &6396874928381213662
 MonoBehaviour:
@@ -2192,6 +2246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &4076643395576244901
 GameObject:
   m_ObjectHideFlags: 0
@@ -2205,7 +2261,7 @@ GameObject:
   - component: {fileID: 5580201524546514354}
   m_Layer: 0
   m_Name: Collider (90,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2239,7 +2295,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &5580201524546514354
 MonoBehaviour:
@@ -2253,6 +2309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &4076927708620554536
 GameObject:
   m_ObjectHideFlags: 0
@@ -2266,7 +2324,7 @@ GameObject:
   - component: {fileID: 5723829611972593212}
   m_Layer: 0
   m_Name: Collider (75,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2300,7 +2358,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &5723829611972593212
 MonoBehaviour:
@@ -2314,6 +2372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &4104729458411698201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2327,7 +2387,7 @@ GameObject:
   - component: {fileID: 6884913858389598993}
   m_Layer: 0
   m_Name: Collider (150,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2361,7 +2421,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &6884913858389598993
 MonoBehaviour:
@@ -2375,6 +2435,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &4113976105577732885
 GameObject:
   m_ObjectHideFlags: 0
@@ -2388,7 +2450,7 @@ GameObject:
   - component: {fileID: 6657660943735306859}
   m_Layer: 0
   m_Name: Collider (-15,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2422,7 +2484,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &6657660943735306859
 MonoBehaviour:
@@ -2436,6 +2498,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &4241400057879558026
 GameObject:
   m_ObjectHideFlags: 0
@@ -2616,7 +2680,7 @@ GameObject:
   - component: {fileID: 3096419556926441059}
   m_Layer: 0
   m_Name: Collider (15,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2650,7 +2714,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &3096419556926441059
 MonoBehaviour:
@@ -2664,6 +2728,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &4548802028770440249
 GameObject:
   m_ObjectHideFlags: 0
@@ -2677,7 +2743,7 @@ GameObject:
   - component: {fileID: 4458620908738462289}
   m_Layer: 0
   m_Name: Collider (-150,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2711,7 +2777,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &4458620908738462289
 MonoBehaviour:
@@ -2725,6 +2791,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &4691857495358684088
 GameObject:
   m_ObjectHideFlags: 0
@@ -2738,7 +2806,7 @@ GameObject:
   - component: {fileID: 4755854888984299949}
   m_Layer: 0
   m_Name: Collider (15,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2772,7 +2840,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &4755854888984299949
 MonoBehaviour:
@@ -2786,6 +2854,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &4796043072357682332
 GameObject:
   m_ObjectHideFlags: 0
@@ -2799,7 +2869,7 @@ GameObject:
   - component: {fileID: 6375139611843505865}
   m_Layer: 0
   m_Name: Collider (180,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2833,7 +2903,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &6375139611843505865
 MonoBehaviour:
@@ -2847,6 +2917,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &4835026526343267895
 GameObject:
   m_ObjectHideFlags: 0
@@ -2860,7 +2932,7 @@ GameObject:
   - component: {fileID: 4260975565275707504}
   m_Layer: 0
   m_Name: Collider (45,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2894,7 +2966,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &4260975565275707504
 MonoBehaviour:
@@ -2908,6 +2980,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &4842294955384118801
 GameObject:
   m_ObjectHideFlags: 0
@@ -2921,7 +2995,7 @@ GameObject:
   - component: {fileID: 2733064380866528524}
   m_Layer: 0
   m_Name: Collider (-30,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2955,7 +3029,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &2733064380866528524
 MonoBehaviour:
@@ -2969,6 +3043,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &5175603221613839880
 GameObject:
   m_ObjectHideFlags: 0
@@ -2982,7 +3058,7 @@ GameObject:
   - component: {fileID: 4413633115697071893}
   m_Layer: 0
   m_Name: Collider (-105,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3016,7 +3092,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &4413633115697071893
 MonoBehaviour:
@@ -3030,6 +3106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &5367498652607362123
 GameObject:
   m_ObjectHideFlags: 0
@@ -3043,7 +3121,7 @@ GameObject:
   - component: {fileID: 6350385084526551988}
   m_Layer: 0
   m_Name: Collider (-120,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3077,7 +3155,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &6350385084526551988
 MonoBehaviour:
@@ -3091,6 +3169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &5373292717331027443
 GameObject:
   m_ObjectHideFlags: 0
@@ -3104,7 +3184,7 @@ GameObject:
   - component: {fileID: 4882339646243379750}
   m_Layer: 0
   m_Name: Collider (135,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3138,7 +3218,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &4882339646243379750
 MonoBehaviour:
@@ -3152,6 +3232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &5421258560291591936
 GameObject:
   m_ObjectHideFlags: 0
@@ -3165,7 +3247,7 @@ GameObject:
   - component: {fileID: 1843237666693068890}
   m_Layer: 0
   m_Name: Collider (45,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3199,7 +3281,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &1843237666693068890
 MonoBehaviour:
@@ -3213,6 +3295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &5780606989321973059
 GameObject:
   m_ObjectHideFlags: 0
@@ -3226,7 +3310,7 @@ GameObject:
   - component: {fileID: 7409800898190679572}
   m_Layer: 0
   m_Name: Collider (-60,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3260,7 +3344,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &7409800898190679572
 MonoBehaviour:
@@ -3274,6 +3358,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &5854701502870682788
 GameObject:
   m_ObjectHideFlags: 0
@@ -3474,7 +3560,7 @@ GameObject:
   - component: {fileID: 8548012133207566065}
   m_Layer: 0
   m_Name: Collider (-120,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3508,7 +3594,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &8548012133207566065
 MonoBehaviour:
@@ -3522,6 +3608,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &6034940819467083170
 GameObject:
   m_ObjectHideFlags: 0
@@ -3535,7 +3623,7 @@ GameObject:
   - component: {fileID: 4082782737704655131}
   m_Layer: 0
   m_Name: Collider (-30,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3569,7 +3657,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &4082782737704655131
 MonoBehaviour:
@@ -3583,6 +3671,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &6043836189211699588
 GameObject:
   m_ObjectHideFlags: 0
@@ -3596,7 +3686,7 @@ GameObject:
   - component: {fileID: 5145559173037072184}
   m_Layer: 0
   m_Name: Collider (105,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3630,7 +3720,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &5145559173037072184
 MonoBehaviour:
@@ -3644,6 +3734,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &6303961695593631865
 GameObject:
   m_ObjectHideFlags: 0
@@ -3825,7 +3917,7 @@ GameObject:
   - component: {fileID: 5993164747184396260}
   m_Layer: 0
   m_Name: Collider (75,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3859,7 +3951,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &5993164747184396260
 MonoBehaviour:
@@ -3873,6 +3965,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &6481692126509965314
 GameObject:
   m_ObjectHideFlags: 0
@@ -3886,7 +3980,7 @@ GameObject:
   - component: {fileID: 5244671116717004589}
   m_Layer: 0
   m_Name: Collider (75,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3920,7 +4014,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &5244671116717004589
 MonoBehaviour:
@@ -3934,6 +4028,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &6534908513320519432
 GameObject:
   m_ObjectHideFlags: 0
@@ -3947,7 +4043,7 @@ GameObject:
   - component: {fileID: 1368648748776178262}
   m_Layer: 0
   m_Name: Collider (-135,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3981,7 +4077,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &1368648748776178262
 MonoBehaviour:
@@ -3995,6 +4091,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &6621801950092910078
 GameObject:
   m_ObjectHideFlags: 0
@@ -4008,7 +4106,7 @@ GameObject:
   - component: {fileID: 5398267057331569631}
   m_Layer: 0
   m_Name: Collider (45,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4042,7 +4140,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &5398267057331569631
 MonoBehaviour:
@@ -4056,6 +4154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &6709392230493507486
 GameObject:
   m_ObjectHideFlags: 0
@@ -4153,7 +4253,7 @@ GameObject:
   - component: {fileID: 8032555662383681281}
   m_Layer: 0
   m_Name: Collider (0,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4187,7 +4287,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &8032555662383681281
 MonoBehaviour:
@@ -4201,6 +4301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &7081368971415875667
 GameObject:
   m_ObjectHideFlags: 0
@@ -4214,7 +4316,7 @@ GameObject:
   - component: {fileID: 2310599613489492963}
   m_Layer: 0
   m_Name: Collider (-120,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4248,7 +4350,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &2310599613489492963
 MonoBehaviour:
@@ -4262,6 +4364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &7215931646154546545
 GameObject:
   m_ObjectHideFlags: 0
@@ -4275,7 +4379,7 @@ GameObject:
   - component: {fileID: 2558708852690308592}
   m_Layer: 0
   m_Name: Collider (0,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4309,7 +4413,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &2558708852690308592
 MonoBehaviour:
@@ -4323,6 +4427,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &7452142886261480273
 GameObject:
   m_ObjectHideFlags: 0
@@ -4336,7 +4442,7 @@ GameObject:
   - component: {fileID: 4005481033840528525}
   m_Layer: 0
   m_Name: Collider (-105,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4370,7 +4476,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &4005481033840528525
 MonoBehaviour:
@@ -4384,6 +4490,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &7517357745060795055
 GameObject:
   m_ObjectHideFlags: 0
@@ -4397,7 +4505,7 @@ GameObject:
   - component: {fileID: 1737302556337666379}
   m_Layer: 0
   m_Name: Collider (-60,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4431,7 +4539,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &1737302556337666379
 MonoBehaviour:
@@ -4445,6 +4553,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &7633046027858289058
 GameObject:
   m_ObjectHideFlags: 0
@@ -4458,7 +4568,7 @@ GameObject:
   - component: {fileID: 4324611468191117917}
   m_Layer: 0
   m_Name: Collider (-15,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4492,7 +4602,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &4324611468191117917
 MonoBehaviour:
@@ -4506,6 +4616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &7876447681912267417
 GameObject:
   m_ObjectHideFlags: 0
@@ -4519,7 +4631,7 @@ GameObject:
   - component: {fileID: 4107970433990887083}
   m_Layer: 0
   m_Name: Collider (165,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4553,7 +4665,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &4107970433990887083
 MonoBehaviour:
@@ -4567,6 +4679,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &7941286691398028016
 GameObject:
   m_ObjectHideFlags: 0
@@ -4580,7 +4694,7 @@ GameObject:
   - component: {fileID: 6361989848072817176}
   m_Layer: 0
   m_Name: Collider (-90,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4614,7 +4728,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &6361989848072817176
 MonoBehaviour:
@@ -4628,6 +4742,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &8008271540171397641
 GameObject:
   m_ObjectHideFlags: 0
@@ -4641,7 +4757,7 @@ GameObject:
   - component: {fileID: 6067029501625896353}
   m_Layer: 0
   m_Name: Collider (135,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4675,7 +4791,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &6067029501625896353
 MonoBehaviour:
@@ -4689,6 +4805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &8068690382371964304
 GameObject:
   m_ObjectHideFlags: 0
@@ -4702,7 +4820,7 @@ GameObject:
   - component: {fileID: 76706687195569789}
   m_Layer: 0
   m_Name: Collider (30,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4736,7 +4854,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &76706687195569789
 MonoBehaviour:
@@ -4750,6 +4868,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &8154041132644284311
 GameObject:
   m_ObjectHideFlags: 0
@@ -4763,7 +4883,7 @@ GameObject:
   - component: {fileID: 3718061081088430899}
   m_Layer: 0
   m_Name: Collider (-75,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4797,7 +4917,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &3718061081088430899
 MonoBehaviour:
@@ -4811,6 +4931,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &8332310937190652567
 GameObject:
   m_ObjectHideFlags: 0
@@ -4824,7 +4946,7 @@ GameObject:
   - component: {fileID: 4216687302811253505}
   m_Layer: 0
   m_Name: Collider (15,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4858,7 +4980,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &4216687302811253505
 MonoBehaviour:
@@ -4872,6 +4994,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &8380980942747975962
 GameObject:
   m_ObjectHideFlags: 0
@@ -5066,7 +5190,7 @@ GameObject:
   - component: {fileID: 2116061873911569082}
   m_Layer: 0
   m_Name: Collider (120,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5100,7 +5224,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &2116061873911569082
 MonoBehaviour:
@@ -5114,6 +5238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &8478777665579602067
 GameObject:
   m_ObjectHideFlags: 0
@@ -5127,7 +5253,7 @@ GameObject:
   - component: {fileID: 6230241622735721483}
   m_Layer: 0
   m_Name: Collider (0,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5161,7 +5287,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &6230241622735721483
 MonoBehaviour:
@@ -5175,6 +5301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &8480150578134669377
 GameObject:
   m_ObjectHideFlags: 0
@@ -5188,7 +5316,7 @@ GameObject:
   - component: {fileID: 3241042352849059105}
   m_Layer: 0
   m_Name: Collider (120,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5222,7 +5350,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &3241042352849059105
 MonoBehaviour:
@@ -5236,6 +5364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &8601842092751829156
 GameObject:
   m_ObjectHideFlags: 0
@@ -5249,7 +5379,7 @@ GameObject:
   - component: {fileID: 5708176766915473553}
   m_Layer: 0
   m_Name: Collider (-150,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5283,7 +5413,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &5708176766915473553
 MonoBehaviour:
@@ -5297,6 +5427,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &8787644149583421001
 GameObject:
   m_ObjectHideFlags: 0
@@ -5310,7 +5442,7 @@ GameObject:
   - component: {fileID: 1601691079135471206}
   m_Layer: 0
   m_Name: Collider (180,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5344,7 +5476,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &1601691079135471206
 MonoBehaviour:
@@ -5358,6 +5490,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &8990297176562889233
 GameObject:
   m_ObjectHideFlags: 0
@@ -5371,7 +5505,7 @@ GameObject:
   - component: {fileID: 2474139496003134947}
   m_Layer: 0
   m_Name: Collider (-75,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5405,7 +5539,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &2474139496003134947
 MonoBehaviour:
@@ -5419,6 +5553,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &8995104905707949718
 GameObject:
   m_ObjectHideFlags: 0
@@ -5432,7 +5568,7 @@ GameObject:
   - component: {fileID: 4972930672950016902}
   m_Layer: 0
   m_Name: Collider (-45,2)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5466,7 +5602,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2.1}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.5, y: 0.6}
   m_Direction: 0
 --- !u!114 &4972930672950016902
 MonoBehaviour:
@@ -5480,6 +5616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &8997144119124941705
 GameObject:
   m_ObjectHideFlags: 0
@@ -5579,7 +5717,7 @@ GameObject:
   - component: {fileID: 8481046135800745059}
   m_Layer: 0
   m_Name: Collider (-45,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5613,7 +5751,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &8481046135800745059
 MonoBehaviour:
@@ -5627,6 +5765,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &9104446742572140787
 GameObject:
   m_ObjectHideFlags: 0
@@ -5640,7 +5780,7 @@ GameObject:
   - component: {fileID: 6216597085850217862}
   m_Layer: 0
   m_Name: Collider (90,0)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5674,7 +5814,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.9}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.15, y: 0.6}
   m_Direction: 0
 --- !u!114 &6216597085850217862
 MonoBehaviour:
@@ -5688,6 +5828,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &9107415680577570256
 GameObject:
   m_ObjectHideFlags: 0
@@ -5793,7 +5935,7 @@ GameObject:
   - component: {fileID: 6335257767821206546}
   m_Layer: 0
   m_Name: Collider (180,1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5827,7 +5969,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
-  m_Size: {x: 0.1, y: 0.6}
+  m_Size: {x: 0.3, y: 0.6}
   m_Direction: 0
 --- !u!114 &6335257767821206546
 MonoBehaviour:
@@ -5841,6 +5983,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cecba96940a623e9fc97c2752a957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfCollider: {fileID: 0}
+  colliders: []
 --- !u!1 &9138234635667462770
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,8 +32,7 @@ public class GameController : MonoBehaviour
 
         UpdateTime();
         UpdateScore();
-        // InvokeRepeating("spawnEnemy", 0f, (float) spawn );
-        Invoke("spawnEnemy", 0f);
+        InvokeRepeating("spawnEnemy", 0f, (float) spawn );
     }
 
     void Update()

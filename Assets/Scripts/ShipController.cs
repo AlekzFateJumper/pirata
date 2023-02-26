@@ -116,7 +116,7 @@ public class ShipController : MonoBehaviour
     }
 
     void CollideEnter (Collision2D collision) {
-        if (collision.gameObject.CompareTag("CannonBall")) {
+        if (collision.gameObject.tag == "CannonBall") {
             // Para não ser atingido pela própria bala de canhão:
             cBallCtrl cBC = collision.gameObject.GetComponent<cBallCtrl>();
             if(cBC.origin == GetInstanceID()) return;
@@ -150,27 +150,24 @@ public class ShipController : MonoBehaviour
 
     void CollideStay (Collision2D collision) {
         if (collision.gameObject.CompareTag("CannonBall")) return;
-        ContactPoint2D[] contactPoints = new ContactPoint2D[collision.contactCount];
-        collision.GetContacts(contactPoints);
+        // ContactPoint2D[] contactPoints = new ContactPoint2D[collision.contactCount];
+        // collision.GetContacts(contactPoints);
 
-        foreach (ContactPoint2D contactPoint in contactPoints)
-        {
-            if (Math.Abs(contactPoint.normal.x + ship.transform.up.x) < 0.2
-            && Math.Abs(contactPoint.normal.y + ship.transform.up.y) < .2 ) {
-                blocked = false;
-            } else {
-                blocked = true;
-                break;
-            }
-        }
-
-        Debug.Log("Source: " + name + "/" + tag + " Name: " + collision.gameObject.name + " Tag: " + collision.gameObject.tag +
-            "\r\nBlocked: " + blocked + " contactCount: " + collision.contactCount);
+        // foreach (ContactPoint2D contactPoint in contactPoints)
+        // {
+        //     if (Math.Abs(contactPoint.normal.x + ship.transform.up.x) < 0.2
+        //     && Math.Abs(contactPoint.normal.y + ship.transform.up.y) < .2 ) {
+        //         blocked = false;
+        //     } else {
+        //         blocked = true;
+        //         break;
+        //     }
+        // }
 
         float ang = getAngle(collision.transform.position);
         float dang = deltaAngle(ang);
-        Debug.Log("ang: " + ang + " dang: " + dang);
-        if (dang > 150 || dang < -150){
+
+        if (dang > 135 || dang < -135){
             blocked = false;
         }
     }
