@@ -97,12 +97,11 @@ public class EnemyController : MonoBehaviour
         veloc = 0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(shipCtrl.getHealth() <= 0) return;
 
-        playerPos = shipCtrl.ship.transform.position;
+        playerPos = player.transform.position;
         angleToPlayer = getAngle(playerPos);
         deltaToPlayer = deltaAngle(angleToPlayer);
 
@@ -115,10 +114,10 @@ public class EnemyController : MonoBehaviour
         args[0] = veloc;
         args[1] = giro;
         shipCtrl.Mover(args);
-        Debug.Log("Source: " + name + "/" + tag + " Blocked: " + shipCtrl.isBlocked() + " Mover: " + veloc + " / " + giro +
-            "\r\nAngulo 0: "   + angulos["Collider (0,0)"  ].colliders.Count + "/" + angulos["Collider (0,1)"  ].colliders.Count + "/" + angulos["Collider (0,2)"  ].colliders.Count +
-            "\r\nAngulo 15: "  + angulos["Collider (15,0)" ].colliders.Count + "/" + angulos["Collider (15,1)" ].colliders.Count + "/" + angulos["Collider (15,2)" ].colliders.Count +
-            "\r\nAngulo -15: " + angulos["Collider (-15,0)"].colliders.Count + "/" + angulos["Collider (-15,1)"].colliders.Count + "/" + angulos["Collider (-15,2)"].colliders.Count );
+        // Debug.Log("Source: " + name + "/" + tag + " Blocked: " + shipCtrl.isBlocked() + " Mover: " + veloc + " / " + giro +
+        //     "\r\nAngulo 0: "   + angulos["Collider (0,0)"  ].colliders.Count + "/" + angulos["Collider (0,1)"  ].colliders.Count + "/" + angulos["Collider (0,2)"  ].colliders.Count +
+        //     "\r\nAngulo 15: "  + angulos["Collider (15,0)" ].colliders.Count + "/" + angulos["Collider (15,1)" ].colliders.Count + "/" + angulos["Collider (15,2)" ].colliders.Count +
+        //     "\r\nAngulo -15: " + angulos["Collider (-15,0)"].colliders.Count + "/" + angulos["Collider (-15,1)"].colliders.Count + "/" + angulos["Collider (-15,2)"].colliders.Count );
     }
 
     void MoveControl(){
@@ -191,11 +190,11 @@ public class EnemyController : MonoBehaviour
                     }
                 }
             }
-            Debug.Log("Source: " + name + "/" + tag + " Blocked: " + shipCtrl.isBlocked() + " Mover: " + veloc + " / " + giro +
-                "\r\nAngulo 0: "   + angulos["Collider (0,0)"  ].colliders.Count + "/" + angulos["Collider (0,1)"  ].colliders.Count + "/" + angulos["Collider (0,2)"  ].colliders.Count +
-                "\r\nAngulo 15: "  + angulos["Collider (15,0)" ].colliders.Count + "/" + angulos["Collider (15,1)" ].colliders.Count + "/" + angulos["Collider (15,2)" ].colliders.Count +
-                "\r\nAngulo -15: " + angulos["Collider (-15,0)"].colliders.Count + "/" + angulos["Collider (-15,1)"].colliders.Count + "/" + angulos["Collider (-15,2)"].colliders.Count
-            );
+            // Debug.Log("Source: " + name + "/" + tag + " Blocked: " + shipCtrl.isBlocked() + " Mover: " + veloc + " / " + giro +
+            //     "\r\nAngulo 0: "   + angulos["Collider (0,0)"  ].colliders.Count + "/" + angulos["Collider (0,1)"  ].colliders.Count + "/" + angulos["Collider (0,2)"  ].colliders.Count +
+            //     "\r\nAngulo 15: "  + angulos["Collider (15,0)" ].colliders.Count + "/" + angulos["Collider (15,1)" ].colliders.Count + "/" + angulos["Collider (15,2)" ].colliders.Count +
+            //     "\r\nAngulo -15: " + angulos["Collider (-15,0)"].colliders.Count + "/" + angulos["Collider (-15,1)"].colliders.Count + "/" + angulos["Collider (-15,2)"].colliders.Count
+            // );
 
             if(Mathf.Sign(deltaToPlayer) > 0){
                 if(seqPos > 3){
@@ -253,7 +252,6 @@ public class EnemyController : MonoBehaviour
         // Calcula giro para olhar player.
         float abs = Mathf.Abs(deltaToPlayer);
         float g = abs > 1 ? Mathf.Sign(deltaToPlayer) : deltaToPlayer;
-        Debug.Log("GiroToPlayer: " + g + " deltaToPlayer: " + deltaToPlayer);
         return g;
     }
 

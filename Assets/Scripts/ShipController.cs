@@ -47,6 +47,8 @@ public class ShipController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(Health == 0) return;
+
         shipBody.transform.Rotate(Vector3.back * Time.fixedDeltaTime * Girar * rot_speed);
 
         if(Andar >= 0 && !blocked) {
