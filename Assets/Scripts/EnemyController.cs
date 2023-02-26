@@ -25,7 +25,6 @@ public class EnemyController : MonoBehaviour
         shipColliderId = shipCtrl.ship.GetComponent<Collider2D>().GetInstanceID();
         desviar = false;
         deltaToPlayer = 0f;
-        pInRange = false;
         giro = 0f;
         veloc = 0f;
     }
@@ -35,7 +34,8 @@ public class EnemyController : MonoBehaviour
     {
         playerPos = player.transform.position;
 
-        CheckForWalls();
+        if(nearObjs.Count > 0) CheckForWalls();
+        else desviar = false;
 
         if(!desviar) MoveControl();
 
@@ -84,7 +84,8 @@ public class EnemyController : MonoBehaviour
     }
 
     void CheckForWalls(){
-        Collider2d collider = getNearestObj();
+        Collider2D collider = getNearestObj();
+
         var angle = deltaAngle(collider.transform.position);
         var dist = collider.Distance(shipCtrl.ship.GetComponent<Collider2D>());
         var abs = Mathf.Abs(angle);
@@ -103,9 +104,9 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void getNearestObj(){
+    Collider2D? getNearestObj(){
         float minDist = Mathf.Infinity;
-        Collider2D collider;
+        Collider2D? collider = null;
         foreach(var obj in nearObjs) {
             var dist = obj.Distance(shipCtrl.ship.GetComponent<Collider2D>()).distance;
             if(dist < minDist){
