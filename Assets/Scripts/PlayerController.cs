@@ -23,4 +23,8 @@ public class PlayerController : MonoBehaviour
         if(Input.GetButtonDown("Fire2")) SendMessage("TiroLateral", true);
         if(Input.GetButtonDown("Fire3")) SendMessage("TiroLateral", false);
     }
+
+    void TriggerUpdate(NavTrigger trigger){
+    }
+
 }

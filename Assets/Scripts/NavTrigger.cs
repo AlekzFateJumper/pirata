@@ -4,39 +4,34 @@ using UnityEngine;
 
 public class NavTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public Collider2D selfCollider;
+    public List<Collider2D> colliders;
+
+    void Start(){
+        colliders = new List<Collider2D>();
+        selfCollider = GetComponent<Collider2D>();
+        SendMessageUpwards("TriggerUpdate", this);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-        void OnTriggerEnter2D(Collider2D collider){
+    void OnTriggerEnter2D(Collider2D collider){
         if( collider.tag == "Respawn" ||
-            collider.tag == "Player"
+            collider.tag == "Player" ||
+            collider.isTrigger
         ) return;
 
-        SendMessageUpwards("TriggerEnter", collider);
+        colliders.Add(collider);
+
+        SendMessageUpwards("TriggerUpdate", this);
     }
-
-    // void OnTriggerStay2D(Collider2D collider){
-    //     if( collider.tag == "Respawn" ||
-    //         collider.tag == "Player"
-    //     ) return;
-
-    //     SendMessageUpwards("TriggerStay", collider);
-    // }
 
     void OnTriggerExit2D(Collider2D collider){
         if( collider.tag == "Respawn" ||
-            collider.tag == "Player"
+            collider.tag == "Player" ||
+            collider.isTrigger
         ) return;
 
-        SendMessageUpwards("TriggerExit", collider);
+        colliders.Remove(collider);
+
+        SendMessageUpwards("TriggerUpdate", this);
     }
 }
