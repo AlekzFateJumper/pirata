@@ -37,7 +37,7 @@ public class EnemyController : MonoBehaviour
     {
         playerPos = player.transform.position;
 
-        if(nearObjs.Count > 0) CheckForWalls();
+        if(nearObjs.Count > 0) MoveFreeAngle();
         else desviar = false;
 
         if(!desviar) MoveControl();
@@ -120,44 +120,60 @@ public class EnemyController : MonoBehaviour
                 collider = obj;
             }
         }
-        Debug.Log(collider == null ? "Sem parede" : "Com parede");
         return collider;
     }
 
-    float freeAngle(bool nearPlayer = false){
+    void MoveFreeAngle(){
+        float angle = freeAngle();
+
+    }
+
+    float freeAngle(){
         float way = shipCtrl.ship.transform.rotation.z;
         float playerAngle = getAngle(playerPos);
+        if(nearObjs.Count == 1){
+            float objAng = getAngle(nearObjs[0].transform.position);
+            if(Mathf.DeltaAngle(objAng, playerAngle) >= 80) return playerAngle;
+            else return invertAngle(objAng);
+        }else if(nearObjs.Count == 2){
+            float a0 = getAngle(nearObjs[0].transform.position);
+            float a1 = getAngle(nearObjs[1].transform.position);
+            if(Mathf.DeltaAngle(a1, a0) <= 180f){
+                return invertAngle(Mathf.LerpAngle(a0, a1, .5f));
+            }else{
+                return invertAngle(Mathf.LerpAngle(a1, a0, .5f));
+            }
+        }
         float maxRot = Mathf.Infinity;
         float nearAngle = way;
         List<float> angles = new List<float>();
         foreach(var obj in nearObjs) {
-            float angle = getAngle(Vector3 obj.transform.position);
+            float angle = getAngle(obj.transform.position);
             float inv = invertAngle(angle);
             float near = Mathf.DeltaAngle(inv, playerAngle);
-            if( near < maxRot ){
+            if( Mathf.DeltaAngle(angle, playerAngle) < 30f ) desviar = true;
+            if( Mathf.Abs(near) < Mathf.Abs(maxRot) ){
                 maxRot = near;
-                nearAngle = inv;
+                nearAngle = angle;
             }
             angles.Add(angle);
         }
-        angles = angles.OrderBy(item => item.Value).ToList();
-        float bigGapSize = Mathf.Infinity;
-        float[] bigGap = {0f, 0f};
-        float[] nearGap = {0f, 0f};
-        float lastAngle = angles[angles.Count - 1];
-        foreach(float angle in angles){
-            float[] gap = {lastAngle, angle};
-            float size = Mathf.DeltaAngle(angle, lastAngle);
-            if (size < bigGap){
-                bigGap = gap;
-                bigGapSize = size
-            }
-            if(nearPlayer && InRange(player, gap[0], gap[1], true)){
-                nearGap = gap;
-            }
-            
+        angles.Sort();
+        int i = angles.IndexOf(nearAngle);
+        int ia = (i == (angles.Count - 1)) ? 0 : i + 1;
+        int ib = (i == 0) ? (angles.Count - 1) : i - 1;
+        float[] interval = {
+            Mathf.DeltaAngle(angles[i], angles[ib]),
+            Mathf.DeltaAngle(angles[ia], angles[i])
+        };
+        if(interval[0] >= 50 && (interval[0] > interval[1]) || InRange(playerAngle, angles[ib], angles[i], true)){
+            return Mathf.LerpAngle(angles[ib], angles[i], .5f);
+        }else
+        if(interval[1] >= 50 && (interval[1] >= interval[0]) || InRange(playerAngle, angles[i], angles[ia], true)){
+            return Mathf.LerpAngle(angles[i], angles[ia], .5f);
         }
-        return way;
+        var nearest = getNearestObj();
+        return invertAngle(getAngle(nearest.transform.position));
     }
 
     float getAngle(Vector3 target){
@@ -170,6 +186,10 @@ public class EnemyController : MonoBehaviour
 
     float deltaAngle(Vector3 target){
         return Mathf.DeltaAngle(getAngle(target), shipCtrl.ship.transform.eulerAngles.z);
+    }
+
+    float deltaAngle(float target){
+        return Mathf.DeltaAngle(target, shipCtrl.ship.transform.eulerAngles.z);
     }
 
     float invertAngle(float a){
@@ -187,7 +207,7 @@ public class EnemyController : MonoBehaviour
 
     float getGiroToAngle(float angle){
         // Calcula giro para olhar para o angulo.
-        deltaToAngle = deltaAngle(angle);
+        float deltaToAngle = deltaAngle(angle);
         float abs = Mathf.Abs(deltaToAngle);
         float g = Mathf.Sign(deltaToAngle);
         if(abs < 25f) g = g / ((25f - abs)/10f + 1f);
