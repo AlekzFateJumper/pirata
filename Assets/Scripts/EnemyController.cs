@@ -129,7 +129,7 @@ public class EnemyController : MonoBehaviour
     }
 
     float freeAngle(){
-        float way = shipCtrl.ship.transform.rotation.z;
+        float way = transform.rotation.z;
         float playerAngle = getAngle(playerPos);
         if(nearObjs.Count == 1){
             float objAng = getAngle(nearObjs[0].transform.position);
@@ -139,43 +139,27 @@ public class EnemyController : MonoBehaviour
         }else if(nearObjs.Count == 2){
             float a0 = getAngle(nearObjs[0].transform.position);
             float a1 = getAngle(nearObjs[1].transform.position);
-            if(Mathf.DeltaAngle(way, a0) < 50f || Mathf.DeltaAngle(way, a1) < 50f) desviar = true;
+            if(Mathf.DeltaAngle(way, a0) < 50f ||
+               Mathf.DeltaAngle(way, a1) < 50f) desviar = true;
             if(Mathf.DeltaAngle(a1, a0) <= 180f){
-                return invertAngle(Mathf.LerpAngle(a0, a1, .5f));
+                return (Mathf.LerpAngle(a0, a1, .5f));
             }else{
-                return Mathf.LerpAngle(a0, a1, .5f);
+                return invertAngle(Mathf.LerpAngle(a0, a1, .5f));
             }
         }
         float maxRot = Mathf.Infinity;
         float nearAngle = way;
-        List<float> angles = new List<float>();
         foreach(var obj in nearObjs) {
             float angle = getAngle(obj.transform.position);
             float inv = invertAngle(angle);
             float near = Mathf.DeltaAngle(inv, playerAngle);
-            if( Mathf.DeltaAngle(angle, playerAngle) < 30f ) desviar = true;
+            if( Mathf.DeltaAngle(way, angle) < 30f ) desviar = true;
             if( Mathf.Abs(near) < Mathf.Abs(maxRot) ){
                 maxRot = near;
                 nearAngle = angle;
             }
-            angles.Add(angle);
         }
-        angles.Sort();
-        int i = angles.IndexOf(nearAngle);
-        int ia = (i == (angles.Count - 1)) ? 0 : i + 1;
-        int ib = (i == 0) ? (angles.Count - 1) : i - 1;
-        float[] interval = {
-            Mathf.DeltaAngle(angles[i], angles[ib]),
-            Mathf.DeltaAngle(angles[ia], angles[i])
-        };
-        if(interval[0] >= 50 && (interval[0] > interval[1]) || InRange(playerAngle, angles[ib], angles[i], true)){
-            return Mathf.LerpAngle(angles[ib], angles[i], .5f);
-        }else
-        if(interval[1] >= 50 && (interval[1] >= interval[0]) || InRange(playerAngle, angles[i], angles[ia], true)){
-            return Mathf.LerpAngle(angles[i], angles[ia], .5f);
-        }
-        var nearest = getNearestObj();
-        return invertAngle(getAngle(nearest.transform.position));
+        return invertAngle(nearAngle);
     }
 
     float getAngle(Vector3 target){
