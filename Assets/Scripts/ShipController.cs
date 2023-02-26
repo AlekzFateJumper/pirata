@@ -23,8 +23,8 @@ public class ShipController : MonoBehaviour
     private int Health;
     private float Andar;
     private float Girar;
-    public bool blocked;
-    public float[] cannonWait;
+    private bool blocked;
+    private float[] cannonWait;
     private GameObject exploding;
 
     void Start()
@@ -220,6 +220,17 @@ public class ShipController : MonoBehaviour
 
     public void playExplosion(){
         if( explosionAudio != null ) explosionAudio.Play();
+    }
+
+    public int getHealth(){
+        return Health;
+    }
+
+    public bool isBlocked(){
+        return blocked;
+    }
+    public float getCannonWait(int i){
+        return cannonWait[i];
     }
 
     IEnumerator FadeTo(float aValue, float aTime)

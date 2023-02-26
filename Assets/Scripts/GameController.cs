@@ -59,15 +59,17 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
-    int getRandomSP(){
+    int getRandomSP(int i = 0){
+        if(i > 5) return -1;
         int point = UnityEngine.Random.Range(0, spawnPoints.Count);
         if(point == lastSpawn) return getRandomSP();
-        if(spawnPoints[point].GetComponent<SpawnPointCtrl>().occupied) return getRandomSP();
+        if(spawnPoints[point].GetComponent<SpawnPointCtrl>().occupied) return getRandomSP(++i);
         return lastSpawn = point;
     }
 
     void spawnEnemy() {
         int point = getRandomSP();
+        if(point == -1) return;
         GameObject enemy = Instantiate(shipPrefab, spawnPoints[point].position, Quaternion.identity);
         EnemyController enemyScript = enemy.AddComponent<EnemyController>();
         ShipController shipScript = enemy.GetComponent<ShipController>();

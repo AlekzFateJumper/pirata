@@ -10,12 +10,11 @@ public class EnemyController : MonoBehaviour
     private Vector3 playerPos;
     private ShipController shipCtrl;
     private int shipColliderId;
-    private bool desviar;
     private float giro;
     private float veloc;
+    private float angleToPlayer;
     private float deltaToPlayer;
-    private float anguloDesvio;
-    private List<Collider2D> nearObjs;
+    private Dictionary<int, int> angulos;
 
     public void Init(List<Sprite> sprites)
     {
@@ -24,10 +23,8 @@ public class EnemyController : MonoBehaviour
         shipCtrl.shipSprite.sprite = shipCtrl.sprites[3];
         player = GameObject.FindWithTag("Player");
         shipColliderId = shipCtrl.ship.GetComponent<Collider2D>().GetInstanceID();
-        desviar = false;
-        anguloDesvio = 0f;
         deltaToPlayer = 0f;
-        nearObjs = new List<Collider2D>();
+        angleToPlayer = 0f;
         giro = 0f;
         veloc = 0f;
     }
@@ -35,27 +32,31 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerPos = player.transform.position;
+        if(shipCtrl.getHealth() <= 0) return;
 
-        if(nearObjs.Count > 0) Desviar();
+        playerPos = player.transform.position;
+        angleToPlayer = getAngle(playerPos);
+        deltaToPlayer = deltaAngle(angleToPlayer);
+
+        if(angulos[0] > 0 || angulos[15] > 0 || angulos[-15] > 0) Desviar();
         else MoveControl();
 
         object[] args = new object[2];
         args[0] = veloc;
         args[1] = giro;
         shipCtrl.Mover(args);
-        Debug.Log("Blocked: " + shipCtrl.blocked + "\r\nMover: " + veloc + " / " + giro + "\r\nObjs: " + nearObjs.Count);
+        Debug.Log("Source: " + name + "/" + tag + " Blocked: " + shipCtrl.isBlocked() + " Mover: " + veloc + " / " + giro );
     }
 
     void MoveControl(){
         float playerDist = Vector3.Distance(playerPos, transform.position);
 
-        if(playerDist <= 2f && shipCtrl.tag == "Shooter"){
+        if(tag == "Shooter" && playerDist <= 2f){
             veloc = 0f;
             if ( InRange( deltaToPlayer, -45, 45, true ) ) {
                 if ( InRange( deltaToPlayer, -1, 1, true ) ) {
                     giro = deltaToPlayer / 100;
-                    if(shipCtrl.cannonWait[0] <= 0f) shipCtrl.TiroFrontal();
+                    if(shipCtrl.getCannonWait(0) <= 0f) shipCtrl.TiroFrontal();
                 }else{
                     giro = getGiroToPlayer();
                 }
@@ -64,7 +65,7 @@ public class EnemyController : MonoBehaviour
                 float sideDelta = deltaToPlayer + 90;
                 if ( InRange( sideDelta, -1, 1, true ) ) {
                     giro = sideDelta / 100;
-                    if(shipCtrl.cannonWait[0] <= 0f) shipCtrl.TiroLateral(true);
+                    if(shipCtrl.getCannonWait(1) <= 0f) shipCtrl.TiroLateral(true);
                 }else{
                     giro = sideDelta == 0f ? 0 : Mathf.Sign(sideDelta);
                 }
@@ -73,9 +74,9 @@ public class EnemyController : MonoBehaviour
                 float sideDelta = deltaToPlayer - 90;
                 if ( InRange( sideDelta, -1, 1, true ) ) {
                     giro = sideDelta / 100;
-                    if(shipCtrl.cannonWait[0] <= 0f) shipCtrl.TiroLateral(false);
+                    if(shipCtrl.getCannonWait(2) <= 0f) shipCtrl.TiroLateral(false);
                 }else{
-                    giro = sideDelta == 0f ? 0 : Mathf.Sign(sideDelta);
+                    giro = Math.Abs(sideDelta) == 0f ? 0 : Mathf.Sign(sideDelta);
                 }
             }
         } else {
@@ -85,40 +86,46 @@ public class EnemyController : MonoBehaviour
     }
 
     void Desviar(){
-        float angle = freeAngle();
-        Debug.Log("Ship: " + tag + " / " + transform.position + "\r\nAngle: " + angle);
-        giro = getGiroToAngle(angle);
-    }
-
-    float freeAngle(){
-        float way = shipCtrl.ship.transform.eulerAngles.z;
-        float playerAngle = getAngle(playerPos);
-        if(nearObjs.Count == 1){
-            float objAng = getAngle(nearObjs[0].transform.position);
-            if(Mathf.DeltaAngle(way, objAng) < 50f) desviar = true;
-            if(Mathf.DeltaAngle(objAng, playerAngle) >= 80f) return playerAngle;
-            return invertAngle(objAng);
-        }else if(nearObjs.Count == 2){
-            float a0 = getAngle(nearObjs[0].transform.position);
-            float a1 = getAngle(nearObjs[1].transform.position);
-            if(Mathf.DeltaAngle(way, a0) < 50f ||
-               Mathf.DeltaAngle(way, a1) < 50f) desviar = true;
-            else return way;
-            return invertAngle(Mathf.LerpAngle(a0, a1, .5f));
-        }
-        float maxRot = 360f;
-        float nearAngle = way;
-        foreach(var obj in nearObjs) {
-            float angle = getAngle(obj.transform.position);
-            float inv = invertAngle(angle);
-            float near = Mathf.DeltaAngle(inv, playerAngle);
-            if( Mathf.DeltaAngle(way, angle) < 50f ) desviar = true;
-            if( Mathf.Abs(near) < Mathf.Abs(maxRot) ){
-                maxRot = near;
-                nearAngle = inv;
+        int qtdPos = 0;
+        int qtdNeg = 0;
+        int seqPos = 0;
+        int seqNeg = 0;
+    
+        for(int i = 0; i <= 180; i+=15){
+            if (i == 0 || i == 180) {
+                if(!angulos.ContainsKey(i)) angulos[i] = 0;
+                qtdPos += angulos[i];
+                qtdNeg += angulos[i];
+                if(angulos[i] == 0) {
+                    seqPos++;
+                    seqNeg++;
+                }
+            } else {
+                if(!angulos.ContainsKey(i)) angulos[i] = 0;
+                qtdPos += angulos[i];
+                if(angulos[i] == 0) {
+                    seqPos++;
+                }
+                if(!angulos.ContainsKey(-i)) angulos[-i] = 0;
+                qtdNeg += angulos[-i];
+                if(angulos[-i] == 0) {
+                    seqNeg++;
+                }
+            }
+            if(seqPos >= 3){
+                giro = 1;
+                break;
+            }else if(seqNeg >= 3){
+                giro = -1;
+                break;
+            }else if(qtdPos >= qtdNeg && i == 180){
+                giro = 1;
+                break;
+            }else if(qtdNeg > qtdPos && i == 180){
+                giro = -1;
+                break;
             }
         }
-        return nearAngle;
     }
 
     float getAngle(Vector3 target){
@@ -139,53 +146,26 @@ public class EnemyController : MonoBehaviour
 
     float getGiroToPlayer(){
         // Calcula giro para olhar player.
-        deltaToPlayer = deltaAngle(getAngle(playerPos));
         float abs = Mathf.Abs(deltaToPlayer);
         float g = Mathf.Sign(deltaToPlayer);
         if(abs < 25f) g = g / ((25f - abs)/10f + 1f);
         return g;
     }
 
-    float getGiroToAngle(float angle){
-        // Calcula giro para olhar para o angulo.
-        float deltaToAngle = deltaAngle(angle);
-        float abs = Mathf.Abs(deltaToAngle);
-        float g = Mathf.Sign(deltaToAngle);
-        if(abs < 25f) g = g / ((25f - abs)/10f + 1f);
-        return g;
+    void TriggerEnter(Collider2D collider){
+        int z = Mathf.RoundToInt(collider.transform.localEulerAngles.z);
+        int qtd = 0;
+        if(angulos.ContainsKey(z)) qtd = angulos[z];
+        angulos[z] = ++qtd;
     }
 
-    void OnTriggerEnter2D(Collider2D collider){
-        if( collider.GetInstanceID() == shipColliderId ||
-            collider.tag == "Respawn" ||
-            collider.tag == "Player"
-        ) return;
+    void TriggerStay(Collider2D collider){
 
-        // Debug.Log("Enter: " + collider.name + "\r\nTag: " + collider.tag);
-
-        nearObjs.Add(collider);
     }
 
-    void OnTriggerStay2D(Collider2D collider){
-        if( collider.GetInstanceID() == shipColliderId ||
-            collider.tag == "Respawn" ||
-            collider.tag == "Player"
-        ) return;
-
-        var dist = collider.Distance(shipCtrl.ship.GetComponent<Collider2D>()).distance;
-
-        veloc = Mathf.Clamp(dist - 1.5f, 0f, 1f);
-    }
-
-    void OnTriggerExit2D(Collider2D collider){
-        if( collider.GetInstanceID() == shipColliderId ||
-            collider.tag == "Respawn" ||
-            collider.tag == "Player"
-        ) return;
-
-        // Debug.Log("Exit: " + collider.name + "\r\nTag: " + collider.tag);
-
-        nearObjs.Remove(collider);
+    void TriggerExit(Collider2D collider){
+        int z = Mathf.RoundToInt(collider.transform.localEulerAngles.z);
+        angulos[z] = angulos[z] - 1;
     }
 
     bool InRange(float n, float min, float max, bool eq = false){
