@@ -92,7 +92,7 @@ public class ShipController : MonoBehaviour
 
     void Naufragio() {
         if(gameObject.CompareTag("Player")) {
-            gameObject.SendMessageUpwards("GameOver");
+            SendMessageUpwards("GameOver");
         }else{
             Destroy(gameObject);
         }
