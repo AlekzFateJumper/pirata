@@ -14,10 +14,6 @@ public class EnemyController : MonoBehaviour
     private float veloc;
     private float angleToPlayer;
     private float deltaToPlayer;
-    private float iniAngBlock;
-    private float blockGiro;
-    private int blockGiroSign;
-    private Vector3 lastBlockPos;
     private Dictionary<string, NavTrigger?> angulos;
 
     public void Init(List<Sprite> sprites)
@@ -97,10 +93,6 @@ public class EnemyController : MonoBehaviour
         };
         deltaToPlayer = 0f;
         angleToPlayer = 0f;
-        iniAngBlock = 360f;
-        blockGiro = 0f;
-        blockGiroSign = 0;
-        lastBlockPos = new Vector3();
         giro = 0f;
         veloc = 0f;
     }
@@ -112,10 +104,6 @@ public class EnemyController : MonoBehaviour
         playerPos = player.transform.position;
         angleToPlayer = getAngle(playerPos);
         deltaToPlayer = deltaAngle(angleToPlayer);
-        if( !shipCtrl.isBlocked() && blockGiro != 0f ){
-            blockGiro = 0f;
-            iniAngBlock = 360f;
-        }
         if( shipCtrl.isBlocked() ) Unblock();
         else if( angulos["Collider (0,0)"].colliders.Count > 0 ||
             angulos["Collider (0,1)"].colliders.Count > 0 ) Desviar();
@@ -167,16 +155,13 @@ public class EnemyController : MonoBehaviour
     }
 
     void Desviar(){
-        int qtdPos = 0;
-        int qtdNeg = 0;
         int seqPos = 0;
         int seqNeg = 0;
-    
-        for ( int i = 0; i <= 180; i+=15 ) {
-            for ( int j = 0; j < 2; j++ ){
+        for ( int i = 15; i <= 180; i+=15 ) {
+            seqPos = 0;
+            seqNeg = 0;
+            for ( int j = 0; j < 3; j++ ){
                 if (i == 0 || i == 180) {
-                    qtdPos += (3-j) * angulos["Collider (" + i + "," + j + ")"].colliders.Count;
-                    qtdNeg += (3-j) * angulos["Collider (" + i + "," + j + ")"].colliders.Count;
                     if(angulos["Collider (" + i + "," + j + ")"].colliders.Count == 0) {
                         seqPos++;
                         seqNeg++;
@@ -185,13 +170,11 @@ public class EnemyController : MonoBehaviour
                         seqNeg = 0;
                     }
                 } else {
-                    qtdPos += (3-j) * angulos["Collider (" + i + "," + j + ")"].colliders.Count;
                     if(angulos["Collider (" + i + "," + j + ")"].colliders.Count == 0) {
                         seqPos++;
                     }else{
                         seqPos = 0;
                     }
-                    qtdNeg += (3-j) * angulos["Collider (-" + i + "," + j + ")"].colliders.Count;
                     if(angulos["Collider (-" + i + "," + j + ")"].colliders.Count == 0) {
                         seqNeg++;
                     }else{
@@ -200,116 +183,34 @@ public class EnemyController : MonoBehaviour
                 }
             }
 
-            if(Mathf.Sign(deltaToPlayer) > 0){
-                if(seqPos > 2){
+            if(deltaToPlayer >= 0){
+                if(seqPos > 1){
                     giro = 1f;
-                    break;
-                }else if(seqNeg > 2){
+                    veloc = ((float)seqPos) / 3f;
+                    return;
+                }else if(seqNeg > 1){
                     giro = -1f;
-                    break;
+                    veloc = ((float)seqNeg) / 3f;
+                    return;
                 }
             }else{
-                if(seqNeg > 2){
+                if(seqNeg > 1){
                     giro = -1f;
-                    break;
-                }else if(seqPos > 2){
+                    veloc = ((float)seqNeg) / 3f;
+                    return;
+                }else if(seqPos > 1){
                     giro = 1f;
-                    break;
+                    veloc = ((float)seqPos) / 3f;
+                    return;
                 }
             }
         }
-        if(Mathf.Sign(deltaToPlayer) > 0){
-            if(qtdPos >= qtdNeg && giro == 0){
-                giro = 1f;
-            }else if(qtdNeg > qtdPos && giro == 0){
-                giro = -1f;
-            }
-        }else{
-            if(qtdNeg >= qtdPos && giro == 0){
-                giro = -1f;
-            }else if(qtdPos > qtdNeg && giro == 0){
-                giro = 1f;
-            }
-        }
-        veloc = ( ( angulos["Collider (0,0)"].colliders.Count > 0 || angulos["Collider (" + (giro * 15) + ",0)"].colliders.Count > 0 ) ? 0f : 
-                ( ( angulos["Collider (0,1)"].colliders.Count > 0 || angulos["Collider (" + (giro * 15) + ",1)"].colliders.Count > 0 ) ? .2f : 
-                ( ( angulos["Collider (0,2)"].colliders.Count > 0 || angulos["Collider (" + (giro * 15) + ",2)"].colliders.Count > 0 ) ? .5f : .75f ) ) );
     }
 
     void Unblock(){
-        float ang = shipCtrl.ship.transform.eulerAngles.z;
-        if(iniAngBlock == 360f && blockGiro == 0f){
-            Debug.Log("Desatolando a nave.");
-            iniAngBlock = ang;
-            int seqPos = 0;
-            int seqNeg = 0;
-            for ( int i = 0; i <= 180; i+=15 ) {
-                if (i == 0 || i == 180) {
-                    if(angulos["Collider (" + i + ",0)"].colliders.Count == 0) {
-                        seqPos++;
-                        seqNeg++;
-                    }else{
-                        seqPos = 0;
-                        seqNeg = 0;
-                    }
-                } else {
-                    if(angulos["Collider (" + i + ",0)"].colliders.Count == 0) {
-                        seqPos++;
-                    }else{
-                        seqPos = 0;
-                    }
-                    if(angulos["Collider (-" + i + ",0)"].colliders.Count == 0) {
-                        seqNeg++;
-                    }else{
-                        seqNeg = 0;
-                    }
-                }
-                if(seqPos >= 2){
-                    blockGiro = 1f;
-                    break;
-                }else if(seqNeg >= 2){
-                    blockGiro = -1f;
-                    break;
-                }
-            }
-        }
-
-        Vector3 pos = shipCtrl.transform.position;
-        if(!shipCtrl.isBlocked()){
-            if(angulos["Collider (0,0)"].colliders.Count > 0){  
-                blockGiro = 0.7f * blockGiroSign;
-                veloc = 0f;
-            }else{
-                iniAngBlock = 360f;
-                blockGiro = 0f;
-                blockGiroSign = 0;
-            }
-        }else if( lastBlockPos.x != pos.x || lastBlockPos.y != pos.y ){
-            if(angulos["Collider (0,0)"].colliders.Count == 0){
-                if(angulos["Collider (0,1)"].colliders.Count == 0){
-                    if(angulos["Collider (0,2)"].colliders.Count == 0){
-                        blockGiro = 0f;
-                        veloc = 1f;
-                    }else{
-                        blockGiro = 0.2f * blockGiroSign;
-                        veloc = 0.4f;
-                    }
-                }else{
-                        blockGiro = 0.4f * blockGiroSign;
-                        veloc = 0.2f;
-                }
-            }else{
-                blockGiro = 1f * blockGiroSign;
-                veloc = 0f;
-            }
-        }else {
-            blockGiro = .2f * blockGiroSign;
-            veloc = 1;
-        }
-        giro = blockGiro;
-
-        if(Mathf.Abs(blockGiro) > 0f && shipCtrl.isBlocked()) blockGiroSign = Mathf.RoundToInt(Mathf.Sign(blockGiro));
-        lastBlockPos = pos;
+        var sign = Mathf.Sign(deltaToPlayer);
+        giro = sign;
+        veloc = 1f;
     }
 
     float getAngle(Vector3 target){

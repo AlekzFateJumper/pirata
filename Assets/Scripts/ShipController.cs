@@ -92,7 +92,11 @@ public class ShipController : MonoBehaviour
 
     void Naufragio() {
         if(gameObject.CompareTag("Player")) {
-            SendMessageUpwards("GameOver");
+            GameObject gameCtrlObj = GameObject.FindWithTag("GameController");
+            if(gameCtrlObj != null){
+                GameController gameCtrl = gameCtrlObj.GetComponent<GameController>();
+                if(gameCtrl != null) gameCtrl.GameOver();
+            }
         }else{
             Destroy(gameObject);
         }
@@ -193,7 +197,7 @@ public class ShipController : MonoBehaviour
         GameObject cBall = Instantiate(cannonBall, new Vector3(canhaoFrontal.position.x, canhaoFrontal.position.y, canhaoFrontal.position.z),canhaoFrontal.rotation) as GameObject;
         cBall.GetComponent<cBallCtrl>().setOrigin(GetInstanceID(), tag);
         cBall.GetComponent<Rigidbody2D>().AddForce(canhaoFrontal.right * 1000);
-        cannonWait[0] = .5f;
+        cannonWait[0] = .75f;
         AudioSource audio = canhaoFrontal.GetComponent<AudioSource>();
         if (audio != null) audio.Play();
     }
@@ -203,9 +207,9 @@ public class ShipController : MonoBehaviour
         if (direita) {
             if (cannonWait[1] > 0) return;
             cannons = canhaoDir;
-            cannonWait[1] = .5f;
+            cannonWait[1] = .75f;
         } else if (cannonWait[2] > 0) return;
-        else cannonWait[2] = .5f;
+        else cannonWait[2] = .75f;
         
         foreach (var cannon in cannons) {
             GameObject cBall = Instantiate(cannonBall, new Vector3(cannon.position.x, cannon.position.y, cannon.position.z),cannon.rotation) as GameObject;

@@ -23,7 +23,7 @@ public class SpawnPointCtrl : MonoBehaviour
     }
 
     void OnTriggerStay2D(Collider2D collider){
-        occupied = true;
+        // occupied = true;
     }
 
     void OnTriggerLeave2D(Collider2D collider){
