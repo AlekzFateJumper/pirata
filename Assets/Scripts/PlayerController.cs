@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void TriggerUpdate(NavTrigger trigger){
+        trigger.gameObject.SetActive(false);
     }
 
 }

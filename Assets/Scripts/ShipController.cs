@@ -150,25 +150,29 @@ public class ShipController : MonoBehaviour
 
     void CollideStay (Collision2D collision) {
         if (collision.gameObject.CompareTag("CannonBall")) return;
-        // ContactPoint2D[] contactPoints = new ContactPoint2D[collision.contactCount];
-        // collision.GetContacts(contactPoints);
+        if (collision.gameObject.name == "Main Camera"){
+            ContactPoint2D[] contactPoints = new ContactPoint2D[collision.contactCount];
+            collision.GetContacts(contactPoints);
 
-        // foreach (ContactPoint2D contactPoint in contactPoints)
-        // {
-        //     if (Math.Abs(contactPoint.normal.x + ship.transform.up.x) < 0.2
-        //     && Math.Abs(contactPoint.normal.y + ship.transform.up.y) < .2 ) {
-        //         blocked = false;
-        //     } else {
-        //         blocked = true;
-        //         break;
-        //     }
-        // }
+            foreach (ContactPoint2D contactPoint in contactPoints)
+            {
+                if (Math.Abs(contactPoint.normal.x + ship.transform.up.x) < 0.2
+                && Math.Abs(contactPoint.normal.y + ship.transform.up.y) < .2 ) {
+                    blocked = false;
+                } else {
+                    blocked = true;
+                    break;
+                }
+            }
+        }else{
+            float ang = getAngle(collision.transform.position);
+            float dang = deltaAngle(ang);
 
-        float ang = getAngle(collision.transform.position);
-        float dang = deltaAngle(ang);
-
-        if (dang > 135 || dang < -135){
-            blocked = false;
+            if (dang > 135 || dang < -135){
+                blocked = false;
+            }else{
+                blocked = true;
+            }
         }
     }
 
