@@ -644,6 +644,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 9107415680577570256, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4517fe93b5babd71b6a9496dfe44529, type: 3}
 --- !u!4 &739250801 stripped
@@ -4839,7 +4843,7 @@ GameObject:
   - component: {fileID: 2003866249}
   m_Layer: 0
   m_Name: Controller
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

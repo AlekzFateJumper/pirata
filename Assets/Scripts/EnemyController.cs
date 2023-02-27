@@ -125,45 +125,43 @@ public class EnemyController : MonoBehaviour
         args[0] = veloc;
         args[1] = giro;
         shipCtrl.Mover(args);
-        // Debug.Log("Source: " + name + "/" + tag + " Blocked: " + shipCtrl.isBlocked() + " Mover: " + veloc + " / " + giro +
-        //     "\r\nAngulo 0: "   + angulos["Collider (0,0)"  ].colliders.Count + "/" + angulos["Collider (0,1)"  ].colliders.Count + "/" + angulos["Collider (0,2)"  ].colliders.Count +
-        //     "\r\nAngulo 15: "  + angulos["Collider (15,0)" ].colliders.Count + "/" + angulos["Collider (15,1)" ].colliders.Count + "/" + angulos["Collider (15,2)" ].colliders.Count +
-        //     "\r\nAngulo -15: " + angulos["Collider (-15,0)"].colliders.Count + "/" + angulos["Collider (-15,1)"].colliders.Count + "/" + angulos["Collider (-15,2)"].colliders.Count );
     }
 
     void MoveControl(){
         float playerDist = Vector3.Distance(playerPos, transform.position);
 
-        if(tag == "Shooter" && playerDist <= 2f){
+        if(tag == "Shooter" && playerDist <= 2.5f){
             veloc = 0f;
-            if ( InRange( deltaToPlayer, -45, 45, true ) ) {
-                if ( InRange( deltaToPlayer, -1, 1, true ) ) {
-                    giro = deltaToPlayer / 100;
+            if ( InRange( deltaToPlayer, -45f, 45f, true ) ) {
+                if ( InRange( deltaToPlayer, -2.5f, 2.5f, true ) ) {
+                    giro = deltaToPlayer / 100f;
                     SendMessage("TiroFrontal");
                 }else{
                     giro = getGiroToPlayer();
                 }
             } else
-            if ( InRange( deltaToPlayer, -180, -45, false ) ) {
-                float sideDelta = deltaToPlayer + 90;
-                if ( InRange( sideDelta, -1, 1, true ) ) {
+            if ( InRange( deltaToPlayer, -180f, -45f, false ) ) {
+                float sideDelta = deltaToPlayer + 90f;
+                if ( InRange( sideDelta, -2.5f, 2.5f, true ) ) {
                     giro = sideDelta / 100;
                     SendMessage("TiroLateral", true);
                 }else{
-                    giro = sideDelta == 0f ? 0 : Mathf.Sign(sideDelta);
+                    giro = Mathf.Clamp(Mathf.Sign(sideDelta) / (sideDelta >= 20f ? 1 : 20 - Mathf.FloorToInt(sideDelta)), 0f, 1f);
                 }
             } else
-            if ( InRange( deltaToPlayer, 45, 180, false ) ) {
-                float sideDelta = deltaToPlayer - 90;
-                if ( InRange( sideDelta, -1, 1, true ) ) {
-                    giro = sideDelta / 100;
+            if ( InRange( deltaToPlayer, 45f, 180f, false ) ) {
+                float sideDelta = deltaToPlayer - 90f;
+                if ( InRange( sideDelta, -2.5f, 2.5f, true ) ) {
+                    giro = sideDelta / 100f;
                     SendMessage("TiroLateral", false);
                 }else{
-                    giro = Math.Abs(sideDelta) == 0f ? 0 : Mathf.Sign(sideDelta);
+                    giro = Mathf.Clamp(Mathf.Sign(sideDelta) / (sideDelta >= 20f ? 1f: 20f - Mathf.FloorToInt(sideDelta)), 0f, 1f);
                 }
             }
         } else {
-            veloc = angulos["Collider (0,2)"].colliders.Count > 0 ? .6f : 1f;
+            veloc = angulos["Collider (0,2)"].colliders.Count > 0 ? .6f :
+                    angulos["Collider (0,1)"].colliders.Count > 0 ? .3f :
+                    angulos["Collider (0,0)"].colliders.Count > 0 ?  0f : 1f;
             giro = getGiroToPlayer();
         }
     }
@@ -241,6 +239,7 @@ public class EnemyController : MonoBehaviour
     void Unblock(){
         float ang = shipCtrl.ship.transform.eulerAngles.z;
         if(iniAngBlock == 360f && blockGiro == 0f){
+            Debug.Log("Desatolando a nave.");
             iniAngBlock = ang;
             int seqPos = 0;
             int seqNeg = 0;
@@ -276,25 +275,40 @@ public class EnemyController : MonoBehaviour
         }
 
         Vector3 pos = shipCtrl.transform.position;
-        if( lastBlockPos.x != pos.x || lastBlockPos.y != pos.y ){
-            blockGiro = 0f;
-            veloc = 1f;
-        }else if(!shipCtrl.isBlocked()){
-            if(angulos["Collider (180,0)"].colliders.Count > 0){
-                blockGiro = .1f * -Mathf.Sign(blockGiro);
-                veloc = 1f;
+        if(!shipCtrl.isBlocked()){
+            if(angulos["Collider (0,0)"].colliders.Count > 0){  
+                blockGiro = 0.7f * blockGiroSign;
+                veloc = 0f;
             }else{
                 iniAngBlock = 360f;
                 blockGiro = 0f;
                 blockGiroSign = 0;
             }
-        }else{
-            blockGiro = .2f * Mathf.Sign(blockGiro);
+        }else if( lastBlockPos.x != pos.x || lastBlockPos.y != pos.y ){
+            if(angulos["Collider (0,0)"].colliders.Count == 0){
+                if(angulos["Collider (0,1)"].colliders.Count == 0){
+                    if(angulos["Collider (0,2)"].colliders.Count == 0){
+                        blockGiro = 0f;
+                        veloc = 1f;
+                    }else{
+                        blockGiro = 0.2f * blockGiroSign;
+                        veloc = 0.4f;
+                    }
+                }else{
+                        blockGiro = 0.4f * blockGiroSign;
+                        veloc = 0.2f;
+                }
+            }else{
+                blockGiro = 1f * blockGiroSign;
+                veloc = 0f;
+            }
+        }else {
+            blockGiro = .2f * blockGiroSign;
             veloc = 1;
         }
         giro = blockGiro;
 
-        if(Mathf.Abs(blockGiro) > .5f && shipCtrl.isBlocked()) blockGiroSign = Mathf.RoundToInt(Mathf.Sign(blockGiro));
+        if(Mathf.Abs(blockGiro) > 0f && shipCtrl.isBlocked()) blockGiroSign = Mathf.RoundToInt(Mathf.Sign(blockGiro));
         lastBlockPos = pos;
     }
 
