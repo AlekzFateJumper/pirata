@@ -116,7 +116,7 @@ public class ShipController : MonoBehaviour
                 pos = new Vector3(-1f,0,0);
             break;
         }
-        lifeMask.position = pos;
+        lifeMask.localPosition = pos;
     }
 
     void CollideEnter (Collision2D collision) {

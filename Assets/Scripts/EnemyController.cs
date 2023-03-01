@@ -15,6 +15,8 @@ public class EnemyController : MonoBehaviour
     private float angleToPlayer;
     private float deltaToPlayer;
     private Dictionary<string, NavTrigger?> angulos;
+    private bool desviando;
+    private float desGiro;
 
     public void Init(List<Sprite> sprites)
     {
@@ -95,6 +97,7 @@ public class EnemyController : MonoBehaviour
         angleToPlayer = 0f;
         giro = 0f;
         veloc = 0f;
+        desviando = false;
     }
 
     void Update()
@@ -104,10 +107,13 @@ public class EnemyController : MonoBehaviour
         playerPos = player.transform.position;
         angleToPlayer = getAngle(playerPos);
         deltaToPlayer = deltaAngle(angleToPlayer);
+
         if( shipCtrl.isBlocked() ) Unblock();
+
         else if( angulos["Collider (0,0)"].colliders.Count > 0 ||
-            angulos["Collider (0,1)"].colliders.Count > 0 ) Desviar();
-        else MoveControl();
+            angulos["Collider (0,1)"].colliders.Count > 0 || desviando ) Desviar();
+
+        else MoveToPlayer();
 
         object[] args = new object[2];
         args[0] = veloc;
@@ -115,7 +121,7 @@ public class EnemyController : MonoBehaviour
         shipCtrl.Mover(args);
     }
 
-    void MoveControl(){
+    void MoveToPlayer(){
         float playerDist = Vector3.Distance(playerPos, transform.position);
 
         if(tag == "Shooter" && playerDist <= 2.5f){
@@ -155,56 +161,50 @@ public class EnemyController : MonoBehaviour
     }
 
     void Desviar(){
-        int seqPos = 0;
-        int seqNeg = 0;
-        for ( int i = 15; i <= 180; i+=15 ) {
-            seqPos = 0;
-            seqNeg = 0;
-            for ( int j = 0; j < 3; j++ ){
-                if (i == 0 || i == 180) {
+        if(desgiro != 0 || !desviando){
+            desgiro = getDeltaGiro();
+        }
+        if(!desviando){
+            desviando = true;
+            giro = Mathf.Sign(desgiro);
+            veloc = 0f;
+        }else if(Mathf.Abs(desgiro) > 1f){
+            giro = Mathf.Sign(desgiro) / 2f;
+            veloc = 0.2f;
+        }else{
+            giro = 0f;
+            veloc = 1f;
+            int rndAng = Mathf.RoundToInt(deltaToPlayer/15f)*15;
+            if( angulos["Collider (" + rndAng + ",0)"].colliders.Count == 0 &&
+                angulos["Collider (" + rndAng + ",1)"].colliders.Count == 0 &&
+                angulos["Collider (" + rndAng + ",2)"].colliders.Count == 0 )
+            {
+                desviando = false;
+            }
+        }
+    }
+
+    float getDeltaGiro(){
+            int seqPos = 0;
+            int seqNeg = 0;
+            for ( int i = 0; i <= 180; i+=15 ) {
+                seqPos = 0;
+                seqNeg = 0;
+                for ( int j = 0; j < 3; j++ ){
                     if(angulos["Collider (" + i + "," + j + ")"].colliders.Count == 0) {
                         seqPos++;
-                        seqNeg++;
-                    }else{
-                        seqPos = 0;
-                        seqNeg = 0;
                     }
-                } else {
-                    if(angulos["Collider (" + i + "," + j + ")"].colliders.Count == 0) {
-                        seqPos++;
-                    }else{
-                        seqPos = 0;
-                    }
-                    if(angulos["Collider (-" + i + "," + j + ")"].colliders.Count == 0) {
+                    if(i != 0 && i != 180 && angulos["Collider (-" + i + "," + j + ")"].colliders.Count == 0) {
                         seqNeg++;
-                    }else{
-                        seqNeg = 0;
+                    }
+                    if(seqPos > 2){
+                        return(i);
+                    }else if(seqNeg > 2){
+                        return(-i);
                     }
                 }
             }
 
-            if(deltaToPlayer >= 0){
-                if(seqPos > 1){
-                    giro = 1f;
-                    veloc = ((float)seqPos) / 3f;
-                    return;
-                }else if(seqNeg > 1){
-                    giro = -1f;
-                    veloc = ((float)seqNeg) / 3f;
-                    return;
-                }
-            }else{
-                if(seqNeg > 1){
-                    giro = -1f;
-                    veloc = ((float)seqNeg) / 3f;
-                    return;
-                }else if(seqPos > 1){
-                    giro = 1f;
-                    veloc = ((float)seqPos) / 3f;
-                    return;
-                }
-            }
-        }
     }
 
     void Unblock(){
