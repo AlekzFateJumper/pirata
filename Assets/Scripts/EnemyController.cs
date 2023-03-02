@@ -110,7 +110,6 @@ public class EnemyController : MonoBehaviour
         if(!desviando){
             desviando = true;
         }
-
         giro = getGiroTo(closestWayByKey(z));
         veloc = giro < 1f ? (1f - giro) / 2 : 0f;
 
@@ -158,7 +157,31 @@ public class EnemyController : MonoBehaviour
     }
 
     void TriggerUpdate(NavTrigger trigger){
-        navAngs[trigger.pos] = (trigger.colliders.Count == 0);
+        Vector3 pos = transform.position;
+        bool barrier = false;
+        if( pos.x < -9          && (
+            trigger.pos == -30  &&
+            trigger.pos == -60  &&
+            trigger.pos == -90  &&
+            trigger.pos == -120 &&
+            trigger.pos == -150 ))
+                barrier = true;
+        else if(pos.x > 9      && (
+            trigger.pos == 30  &&
+            trigger.pos == 60  &&
+            trigger.pos == 90  &&
+            trigger.pos == 120 &&
+            trigger.pos == 150 )) 
+                barrier = true;
+        if(pos.y > 5           && (
+            trigger.pos == 0   &&
+            trigger.pos == 30  &&
+            trigger.pos == 60  &&
+            trigger.pos == -30 &&
+            trigger.pos == -60 ))
+                barrier = true;
+
+        navAngs[trigger.pos] = (trigger.colliders.Count == 0 && !barrier);
     }
 
     bool InRange(float n, float min, float max, bool eq = false){
