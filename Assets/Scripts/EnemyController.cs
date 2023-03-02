@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -14,9 +15,9 @@ public class EnemyController : MonoBehaviour
     private float veloc;
     private float angleToPlayer;
     private float deltaToPlayer;
-    private Dictionary<string, NavTrigger?> angulos;
+    private Dictionary<int,bool> navAngs;
     private bool desviando;
-    private float desGiro;
+    private float z;
 
     public void Init(List<Sprite> sprites)
     {
@@ -25,97 +26,40 @@ public class EnemyController : MonoBehaviour
         shipCtrl.shipSprite.sprite = shipCtrl.sprites[3];
         player = GameObject.FindWithTag("Player");
         shipColliderId = shipCtrl.ship.GetComponent<Collider2D>().GetInstanceID();
-        angulos = new Dictionary<string, NavTrigger?>() {
-            ["Collider (0,0)"   ] = null,
-            ["Collider (15,0)"  ] = null,
-            ["Collider (-15,0)" ] = null,
-            ["Collider (30,0)"  ] = null,
-            ["Collider (-30,0)" ] = null,
-            ["Collider (45,0)"  ] = null,
-            ["Collider (-45,0)" ] = null,
-            ["Collider (60,0)"  ] = null,
-            ["Collider (-60,0)" ] = null,
-            ["Collider (90,0)"  ] = null,
-            ["Collider (-90,0)" ] = null,
-            ["Collider (105,0)" ] = null,
-            ["Collider (-105,0)"] = null,
-            ["Collider (120,0)" ] = null,
-            ["Collider (-120,0)"] = null,
-            ["Collider (135,0)" ] = null,
-            ["Collider (-135,0)"] = null,
-            ["Collider (150,0)" ] = null,
-            ["Collider (-150,0)"] = null,
-            ["Collider (165,0)" ] = null,
-            ["Collider (-165,0)"] = null,
-            ["Collider (180,0)" ] = null,
-            ["Collider (0,1)"   ] = null,
-            ["Collider (15,1)"  ] = null,
-            ["Collider (-15,1)" ] = null,
-            ["Collider (30,1)"  ] = null,
-            ["Collider (-30,1)" ] = null,
-            ["Collider (45,1)"  ] = null,
-            ["Collider (-45,1)" ] = null,
-            ["Collider (60,1)"  ] = null,
-            ["Collider (-60,1)" ] = null,
-            ["Collider (90,1)"  ] = null,
-            ["Collider (-90,1)" ] = null,
-            ["Collider (105,1)" ] = null,
-            ["Collider (-105,1)"] = null,
-            ["Collider (120,1)" ] = null,
-            ["Collider (-120,1)"] = null,
-            ["Collider (135,1)" ] = null,
-            ["Collider (-135,1)"] = null,
-            ["Collider (150,1)" ] = null,
-            ["Collider (-150,1)"] = null,
-            ["Collider (165,1)" ] = null,
-            ["Collider (-165,1)"] = null,
-            ["Collider (180,1)" ] = null,
-            ["Collider (0,2)"   ] = null,
-            ["Collider (15,2)"  ] = null,
-            ["Collider (-15,2)" ] = null,
-            ["Collider (30,2)"  ] = null,
-            ["Collider (-30,2)" ] = null,
-            ["Collider (45,2)"  ] = null,
-            ["Collider (-45,2)" ] = null,
-            ["Collider (60,2)"  ] = null,
-            ["Collider (-60,2)" ] = null,
-            ["Collider (90,2)"  ] = null,
-            ["Collider (-90,2)" ] = null,
-            ["Collider (105,2)" ] = null,
-            ["Collider (-105,2)"] = null,
-            ["Collider (120,2)" ] = null,
-            ["Collider (-120,2)"] = null,
-            ["Collider (135,2)" ] = null,
-            ["Collider (-135,2)"] = null,
-            ["Collider (150,2)" ] = null,
-            ["Collider (-150,2)"] = null,
-            ["Collider (165,2)" ] = null,
-            ["Collider (-165,2)"] = null,
-            ["Collider (180,2)" ] = null
+        navAngs = new Dictionary<int, bool>() {
+            [   0] = true,
+            [  30] = true,
+            [ -30] = true,
+            [  60] = true,
+            [ -60] = true,
+            [  90] = true,
+            [ -90] = true,
+            [ 120] = true,
+            [-120] = true,
+            [ 150] = true,
+            [-150] = true,
+            [ 180] = true
         };
         deltaToPlayer = 0f;
         angleToPlayer = 0f;
         giro = 0f;
         veloc = 0f;
         desviando = false;
-        desGiro = 0f;
+        z = shipCtrl.ship.transform.eulerAngles.z;
     }
 
     void Update()
     {
         if(shipCtrl.getHealth() <= 0) return;
 
+        z = correctAngle(shipCtrl.ship.transform.eulerAngles.z);
         playerPos = player.transform.position;
         angleToPlayer = getAngle(playerPos);
         deltaToPlayer = deltaAngle(angleToPlayer);
 
-        // if( shipCtrl.isBlocked() ) Unblock();
-        // else 
-        if( angulos["Collider (0,0)"].colliders.Count > 0 ||
-            angulos["Collider (0,1)"].colliders.Count > 0 ||
-            angulos["Collider (0,2)"].colliders.Count > 0 ||
-            desviando ) Desviar();
+        int front = (int)correctAngle(Mathf.RoundToInt(z/30f)*30);
 
+        if( desviando || !navAngs[front] || shipCtrl.isBlocked() ) Desviar();
         else MoveToPlayer();
 
         object[] args = new object[2];
@@ -156,64 +100,27 @@ public class EnemyController : MonoBehaviour
                 }
             }
         } else {
-            veloc = angulos["Collider (0,2)"].colliders.Count > 0 ? .6f :
-                    angulos["Collider (0,1)"].colliders.Count > 0 ? .3f :
-                    angulos["Collider (0,0)"].colliders.Count > 0 ?  0f : 1f;
+            int front = (int)correctAngle(Mathf.RoundToInt(z/30f)*30);
+            veloc = navAngs[front] ?  1f : 0f;
             giro = getGiroToPlayer();
         }
     }
 
     void Desviar(){
-        if(desGiro != 0 || !desviando){
-            desGiro = getDeltaGiro();
-        }
         if(!desviando){
             desviando = true;
-            giro = Mathf.Sign(desGiro);
-            veloc = 0f;
-        }else if(Mathf.Abs(desGiro) > 1f){
-            giro = Mathf.Sign(desGiro) / 2f;
-            veloc = 0.2f;
-        }else{
-            giro = 0f;
-            veloc = 1f;
-            int rndAng = Mathf.RoundToInt(deltaToPlayer/15f)*15;
-            if( angulos["Collider (" + rndAng + ",0)"].colliders.Count == 0 &&
-                angulos["Collider (" + rndAng + ",1)"].colliders.Count == 0 &&
-                angulos["Collider (" + rndAng + ",2)"].colliders.Count == 0 )
+        }
+
+        giro = getGiroTo(closestWayByKey(z));
+        veloc = giro < 1f ? (1f - giro) / 2 : 0f;
+
+        if(giro == 0f){
+            int rndAng = (int)correctAngle(Mathf.RoundToInt(angleToPlayer/30f)*30);
+            if( navAngs[rndAng] )
             {
                 desviando = false;
             }
         }
-    }
-
-    float getDeltaGiro(){
-        int seqPos = 0;
-        int seqNeg = 0;
-        for ( int i = 0; i <= 180; i+=15 ) {
-            seqPos = 0;
-            seqNeg = 0;
-            for ( int j = 0; j < 3; j++ ){
-                if(angulos["Collider (" + i + "," + j + ")"].colliders.Count == 0) {
-                    seqPos++;
-                }
-                if(i != 0 && i != 180 && angulos["Collider (-" + i + "," + j + ")"].colliders.Count == 0) {
-                    seqNeg++;
-                }
-                if(seqPos > 2){
-                    return(i);
-                }else if(seqNeg > 2){
-                    return(-i);
-                }
-            }
-        }
-        return(180);
-    }
-
-    void Unblock(){
-        var sign = Mathf.Sign(deltaToPlayer);
-        giro = sign;
-        veloc = 1f;
     }
 
     float getAngle(Vector3 target){
@@ -225,11 +132,15 @@ public class EnemyController : MonoBehaviour
     }
 
     float deltaAngle(float target){
-        return Mathf.DeltaAngle(target, shipCtrl.ship.transform.eulerAngles.z);
+        return Mathf.DeltaAngle(target, z);
     }
 
     float invertAngle(float a){
         return a > 0 ? a - 180 : a + 180;
+    }
+
+    float correctAngle(float a){
+        return a > 180f ? a - 360f : (a <= -180f ? a + 360f : a );
     }
 
     float getGiroToPlayer(){
@@ -239,8 +150,15 @@ public class EnemyController : MonoBehaviour
         return g;
     }
 
+    float getGiroTo(float target){
+        // Calcula giro para olhar para o target.
+        float abs = Mathf.Abs(target);
+        float g = abs > 1 ? Mathf.Sign(target) : target;
+        return g;
+    }
+
     void TriggerUpdate(NavTrigger trigger){
-        angulos[trigger.name] = trigger;
+        navAngs[trigger.pos] = (trigger.colliders.Count == 0);
     }
 
     bool InRange(float n, float min, float max, bool eq = false){
@@ -250,5 +168,9 @@ public class EnemyController : MonoBehaviour
         }
         if(eq) return n >= min && n <= max;
         return n > min && n < max;
+    }
+
+    int closestWayByKey(float number){
+        return navAngs.Where(p => p.Value == true).Aggregate((x,y) => Math.Abs(x.Key-number) < Math.Abs(y.Key-number) ? x : y).Key;
     }
 }

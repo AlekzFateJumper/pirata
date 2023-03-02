@@ -6,6 +6,7 @@ public class NavTrigger : MonoBehaviour
 {
     public Collider2D selfCollider;
     public List<Collider2D> colliders;
+    public int pos;
 
     void Start(){
         colliders = new List<Collider2D>();
