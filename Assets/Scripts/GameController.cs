@@ -62,7 +62,7 @@ public class GameController : MonoBehaviour
         if(i > 5) return -1;
         int point = UnityEngine.Random.Range(0, spawnPoints.Count);
         if(point == lastSpawn) return getRandomSP();
-        // if(spawnPoints[point].GetComponent<SpawnPointCtrl>().occupied) return getRandomSP(++i);
+        if(spawnPoints[point].GetComponent<SpawnPointCtrl>().occupied) return getRandomSP(++i);
         return lastSpawn = point;
     }
 

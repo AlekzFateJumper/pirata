@@ -98,6 +98,7 @@ public class EnemyController : MonoBehaviour
         giro = 0f;
         veloc = 0f;
         desviando = false;
+        desGiro = 0f;
     }
 
     void Update()
@@ -108,10 +109,12 @@ public class EnemyController : MonoBehaviour
         angleToPlayer = getAngle(playerPos);
         deltaToPlayer = deltaAngle(angleToPlayer);
 
-        if( shipCtrl.isBlocked() ) Unblock();
-
-        else if( angulos["Collider (0,0)"].colliders.Count > 0 ||
-            angulos["Collider (0,1)"].colliders.Count > 0 || desviando ) Desviar();
+        // if( shipCtrl.isBlocked() ) Unblock();
+        // else 
+        if( angulos["Collider (0,0)"].colliders.Count > 0 ||
+            angulos["Collider (0,1)"].colliders.Count > 0 ||
+            angulos["Collider (0,2)"].colliders.Count > 0 ||
+            desviando ) Desviar();
 
         else MoveToPlayer();
 
@@ -161,15 +164,15 @@ public class EnemyController : MonoBehaviour
     }
 
     void Desviar(){
-        if(desgiro != 0 || !desviando){
-            desgiro = getDeltaGiro();
+        if(desGiro != 0 || !desviando){
+            desGiro = getDeltaGiro();
         }
         if(!desviando){
             desviando = true;
-            giro = Mathf.Sign(desgiro);
+            giro = Mathf.Sign(desGiro);
             veloc = 0f;
-        }else if(Mathf.Abs(desgiro) > 1f){
-            giro = Mathf.Sign(desgiro) / 2f;
+        }else if(Mathf.Abs(desGiro) > 1f){
+            giro = Mathf.Sign(desGiro) / 2f;
             veloc = 0.2f;
         }else{
             giro = 0f;
@@ -185,26 +188,26 @@ public class EnemyController : MonoBehaviour
     }
 
     float getDeltaGiro(){
-            int seqPos = 0;
-            int seqNeg = 0;
-            for ( int i = 0; i <= 180; i+=15 ) {
-                seqPos = 0;
-                seqNeg = 0;
-                for ( int j = 0; j < 3; j++ ){
-                    if(angulos["Collider (" + i + "," + j + ")"].colliders.Count == 0) {
-                        seqPos++;
-                    }
-                    if(i != 0 && i != 180 && angulos["Collider (-" + i + "," + j + ")"].colliders.Count == 0) {
-                        seqNeg++;
-                    }
-                    if(seqPos > 2){
-                        return(i);
-                    }else if(seqNeg > 2){
-                        return(-i);
-                    }
+        int seqPos = 0;
+        int seqNeg = 0;
+        for ( int i = 0; i <= 180; i+=15 ) {
+            seqPos = 0;
+            seqNeg = 0;
+            for ( int j = 0; j < 3; j++ ){
+                if(angulos["Collider (" + i + "," + j + ")"].colliders.Count == 0) {
+                    seqPos++;
+                }
+                if(i != 0 && i != 180 && angulos["Collider (-" + i + "," + j + ")"].colliders.Count == 0) {
+                    seqNeg++;
+                }
+                if(seqPos > 2){
+                    return(i);
+                }else if(seqNeg > 2){
+                    return(-i);
                 }
             }
-
+        }
+        return(180);
     }
 
     void Unblock(){

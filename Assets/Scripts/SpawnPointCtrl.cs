@@ -19,7 +19,8 @@ public class SpawnPointCtrl : MonoBehaviour
     }
     
     void OnTriggerEnter2D(Collider2D collider){
-        occupied = true;
+        if(collider.tag == "Ship")
+            occupied = true;
     }
 
     void OnTriggerStay2D(Collider2D collider){
@@ -27,6 +28,7 @@ public class SpawnPointCtrl : MonoBehaviour
     }
 
     void OnTriggerLeave2D(Collider2D collider){
-        occupied = false;
+        if(collider.tag == "Ship")
+            occupied = false;
     }
 }
